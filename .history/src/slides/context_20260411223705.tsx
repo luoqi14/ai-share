@@ -211,21 +211,21 @@ export default function SlideContext() {
             </div>
 
             {/* Right Panel */}
-            <div className="w-full sm:flex-[0.6] min-h-[380px] sm:min-h-0 relative flex flex-col bg-surface-container-high/40 rounded-3xl border ghost-border glass-overlay overflow-hidden shadow-2xl mb-6 sm:mb-0">
+            <div className="flex-[0.6] relative flex flex-col bg-surface-container-high/40 rounded-3xl border ghost-border glass-overlay overflow-hidden shadow-2xl">
               <AnimatePresence mode="wait">
 
                 {/* VISUAL A: Chat UI (Steps 2-6) */}
                 {step >= 2 && step <= 6 && (
                   <motion.div
                     key="right-chat"
-                    className="absolute inset-0 flex flex-col p-4 sm:p-8 pb-6 sm:pb-12"
+                    className="absolute inset-0 flex flex-col p-8 pb-12"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.5 }}
                   >
                     {/* Chat Header */}
-                    <div className="flex items-center gap-3 mb-4 sm:mb-8 border-b border-white/5 pb-4 shrink-0">
+                    <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4 shrink-0">
                       <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-tech text-white/50 border border-white/20">AI</div>
                       <div className="text-white/60 font-medium text-sm tracking-wider">Chat Console</div>
                     </div>
@@ -283,21 +283,21 @@ export default function SlideContext() {
                 {step === 7 && (
                   <motion.div
                     key="right-limits"
-                    className="absolute inset-0 flex flex-col justify-center p-4 sm:p-8 md:p-12 gap-4 sm:gap-6 overflow-y-auto"
+                    className="absolute inset-0 flex flex-col justify-center p-12 gap-8"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 1.05 }}
                   >
-                    <div className="text-center font-display text-base sm:text-[22px] text-error mb-1 sm:mb-2 tracking-wider">由于无状态历史累加，引发四大极寒灾难：</div>
+                    <div className="text-center font-display text-[22px] text-error mb-2 tracking-wider">由于无状态历史累加，引发四大极寒灾难：</div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 w-full max-w-2xl mx-auto">
+                    <div className="grid grid-cols-2 gap-5 w-full max-w-2xl mx-auto">
                       {LIMIT_ITEMS.map((item, i) => (
                         <motion.div
                           key={i}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: i * 0.1, type: "spring", stiffness: 200 }}
-                          className="relative group bg-error/5 border border-error/10 hover:border-error/30 p-4 sm:p-6 rounded-2xl transition-colors backdrop-blur-sm shadow-xl overflow-hidden"
+                          className="relative group bg-error/5 border border-error/10 hover:border-error/30 p-6 rounded-2xl transition-colors backdrop-blur-sm shadow-xl overflow-hidden"
                         >
                           <div className="text-[32px] mb-3 drop-shadow-sm">{item.icon}</div>
                           <div className="text-[17px] font-medium text-white/90 mb-2">{item.title}</div>
@@ -344,7 +344,7 @@ export default function SlideContext() {
                 {step === 8 && (
                   <motion.div
                     key="right-filter"
-                    className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 md:p-12 overflow-y-auto"
+                    className="absolute inset-0 flex items-center justify-center p-12"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
@@ -385,7 +385,7 @@ export default function SlideContext() {
                 {step === 9 && (
                   <motion.div
                     key="right-manual"
-                    className="absolute inset-0 flex flex-col justify-center items-center p-4 sm:p-8 md:p-12 gap-4 sm:gap-8 overflow-y-auto"
+                    className="absolute inset-0 flex flex-col justify-center items-center p-12 gap-8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -432,7 +432,7 @@ export default function SlideContext() {
                 {step === 10 && (
                   <motion.div
                     key="right-auto"
-                    className="absolute inset-0 flex flex-col justify-center items-center p-3 sm:p-8 md:p-12 bg-black/40 overflow-y-auto"
+                    className="absolute inset-0 flex flex-col justify-center items-center p-12 bg-black/40"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                   >

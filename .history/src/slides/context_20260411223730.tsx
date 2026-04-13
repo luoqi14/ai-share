@@ -344,7 +344,7 @@ export default function SlideContext() {
                 {step === 8 && (
                   <motion.div
                     key="right-filter"
-                    className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 md:p-12 overflow-y-auto"
+                    className="absolute inset-0 flex items-center justify-center p-12"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
@@ -385,7 +385,7 @@ export default function SlideContext() {
                 {step === 9 && (
                   <motion.div
                     key="right-manual"
-                    className="absolute inset-0 flex flex-col justify-center items-center p-4 sm:p-8 md:p-12 gap-4 sm:gap-8 overflow-y-auto"
+                    className="absolute inset-0 flex flex-col justify-center items-center p-12 gap-8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -432,7 +432,7 @@ export default function SlideContext() {
                 {step === 10 && (
                   <motion.div
                     key="right-auto"
-                    className="absolute inset-0 flex flex-col justify-center items-center p-3 sm:p-8 md:p-12 bg-black/40 overflow-y-auto"
+                    className="absolute inset-0 flex flex-col justify-center items-center p-12 bg-black/40"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                   >

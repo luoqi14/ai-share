@@ -66,36 +66,36 @@ export default function SlideVector() {
               {showMatrixScene && (
                 <motion.div
                   key="matrix-scene"
-                  className="absolute inset-0 flex items-center justify-start sm:justify-center overflow-y-auto pt-4 sm:pt-10"
+                  className="absolute inset-0 flex items-center justify-center pt-10"
                   initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <div className="flex flex-col sm:flex-row items-center justify-center w-full max-w-5xl gap-3 sm:gap-4 md:gap-8 px-4 md:px-8 py-4 sm:py-0">
+                  <div className="flex items-center justify-center w-full max-w-5xl gap-4 md:gap-8 px-4 md:px-8">
                     {/* Target Token */}
                     <div className="flex flex-col items-center">
-                      <div className="text-sm sm:text-lg md:text-xl text-[var(--color-primary-fixed-dim)] mb-3 sm:mb-6 tracking-widest font-bold drop-shadow-md">词元化</div>
+                      <div className="text-lg md:text-xl text-[var(--color-primary-fixed-dim)] mb-6 tracking-widest font-bold drop-shadow-md">词元化</div>
                       {/* Token Circle */}
-                      <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full border border-[var(--color-primary)] shadow-[0_0_30px_rgba(0,190,255,0.4)] flex items-center justify-center relative bg-[var(--color-primary)]/10">
-                        <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-24 md:h-24 rounded-full border-2 border-[var(--color-primary)]/80 flex items-center justify-center">
-                          <div className="w-7 h-7 sm:w-10 sm:h-10 md:w-16 md:h-16 rounded-full border border-[var(--color-primary)] flex items-center justify-center text-white text-sm sm:text-lg md:text-2xl font-bold tracking-widest">
+                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border border-[var(--color-primary)] shadow-[0_0_30px_rgba(0,190,255,0.4)] flex items-center justify-center relative bg-[var(--color-primary)]/10">
+                        <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-[var(--color-primary)]/80 flex items-center justify-center">
+                          <div className="w-10 h-10 md:w-16 md:h-16 rounded-full border border-[var(--color-primary)] flex items-center justify-center text-white text-lg md:text-2xl font-bold tracking-widest">
                             国王
                           </div>
                         </div>
                       </div>
-                      <div className="mt-3 sm:mt-8 border border-[var(--color-primary)] rounded-full px-3 sm:px-4 md:px-6 py-1 sm:py-2 text-[var(--color-primary)] font-mono text-xs sm:text-sm md:text-lg tracking-widest">
+                      <div className="mt-8 border border-[var(--color-primary)] rounded-full px-4 md:px-6 py-2 text-[var(--color-primary)] font-mono text-sm md:text-lg tracking-widest">
                         ID: 9982
                       </div>
                     </div>
 
                     {/* Bridge */}
-                    <div className="flex-none sm:flex-1 w-full sm:w-auto h-10 sm:h-auto flex flex-row sm:flex-col items-center justify-center relative px-4 sm:px-2 md:px-4">
-                      <div className="px-2 md:px-4 py-1 sm:py-1.5 border border-gray-600 rounded-lg text-gray-300 text-[10px] sm:text-xs md:text-sm tracking-widest sm:mb-4 z-10 bg-black/50 backdrop-blur whitespace-nowrap">
+                    <div className="flex-1 flex flex-col items-center justify-center relative px-2 md:px-4">
+                      <div className="px-2 md:px-4 py-1.5 border border-gray-600 rounded-lg text-gray-300 text-xs md:text-sm tracking-widest mb-4 z-10 bg-black/50 backdrop-blur whitespace-nowrap">
                         离散 -{">"} 连续向量
                       </div>
                       {/* Dashed line with laser */}
-                      <div className="flex-1 sm:w-full h-[1px] border-b border-dashed border-gray-600 sm:absolute sm:top-1/2 sm:mt-3 md:mt-2"></div>
+                      <div className="w-full h-[1px] border-b border-dashed border-gray-600 absolute top-1/2 mt-3 md:mt-2"></div>
                       <motion.div
-                        className="h-1 w-1/4 bg-[var(--color-primary)] shadow-[0_0_15px_var(--color-primary)] hidden sm:block sm:absolute sm:top-1/2 sm:mt-[11px] md:mt-[7px] rounded-full"
+                        className="h-1 w-1/4 bg-[var(--color-primary)] shadow-[0_0_15px_var(--color-primary)] absolute top-1/2 mt-[11px] md:mt-[7px] rounded-full"
                         initial={{ left: "0%", opacity: 0 }}
                         animate={{ left: ["0%", "30%", "75%"], opacity: [0, 1, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
@@ -104,9 +104,9 @@ export default function SlideVector() {
 
                     {/* Matrix Lookup */}
                     <div className="flex flex-col items-center">
-                      <div className="text-sm sm:text-lg md:text-xl text-gray-300 mb-3 sm:mb-6 tracking-widest font-bold">词嵌入查询</div>
+                      <div className="text-lg md:text-xl text-gray-300 mb-6 tracking-widest font-bold">词嵌入查询</div>
                       {/* Abstract Grid */}
-                      <div className="border-2 border-indigo-900/50 rounded-xl bg-indigo-950/20 backdrop-blur w-24 h-32 sm:w-32 sm:h-48 md:w-48 md:h-64 p-2 flex flex-col justify-between relative overflow-hidden">
+                      <div className="border-2 border-indigo-900/50 rounded-xl bg-indigo-950/20 backdrop-blur w-32 h-48 md:w-48 md:h-64 p-2 flex flex-col justify-between relative overflow-hidden">
                         {/* Glowing Active Row corresponding to ID 9982. middle row */}
                         <motion.div
                           className="absolute left-0 right-0 h-8 md:h-10 top-[40%] bg-indigo-500/30 shadow-[0_0_30px_var(--color-primary)] z-0"
@@ -121,7 +121,7 @@ export default function SlideVector() {
                           ))}
                         </div>
                       </div>
-                      <div className="mt-3 sm:mt-8 border border-[var(--color-primary)] rounded-full px-3 sm:px-4 md:px-6 py-1 sm:py-2 text-[var(--color-primary)] font-mono text-xs sm:text-sm md:text-lg tracking-widest">
+                      <div className="mt-8 border border-[var(--color-primary)] rounded-full px-4 md:px-6 py-2 text-[var(--color-primary)] font-mono text-sm md:text-lg tracking-widest">
                         200000 X 8192
                       </div>
                     </div>

@@ -57,7 +57,7 @@ export default function SlideVector() {
           >
             {/* Front Card (Vector visualization) */}
             <motion.div
-              className={`absolute inset-0 flex flex-col items-center justify-start sm:justify-center w-full h-full overflow-y-auto sm:overflow-hidden ${showHardwareCard ? "pointer-events-none" : "pointer-events-auto"}`}
+              className="absolute inset-0 flex flex-col items-center justify-center w-full h-full pointer-events-none"
               style={{ backfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
               animate={{ rotateY: showHardwareCard ? 180 : 0 }}
               transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
@@ -66,36 +66,36 @@ export default function SlideVector() {
               {showMatrixScene && (
                 <motion.div
                   key="matrix-scene"
-                  className="absolute inset-0 flex items-center justify-start sm:justify-center overflow-y-auto pt-4 sm:pt-10"
+                  className="absolute inset-0 flex items-center justify-center pt-10"
                   initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <div className="flex flex-col sm:flex-row items-center justify-center w-full max-w-5xl gap-3 sm:gap-4 md:gap-8 px-4 md:px-8 py-4 sm:py-0">
+                  <div className="flex items-center justify-center w-full max-w-5xl gap-4 md:gap-8 px-4 md:px-8">
                     {/* Target Token */}
                     <div className="flex flex-col items-center">
-                      <div className="text-sm sm:text-lg md:text-xl text-[var(--color-primary-fixed-dim)] mb-3 sm:mb-6 tracking-widest font-bold drop-shadow-md">词元化</div>
+                      <div className="text-lg md:text-xl text-[var(--color-primary-fixed-dim)] mb-6 tracking-widest font-bold drop-shadow-md">词元化</div>
                       {/* Token Circle */}
-                      <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full border border-[var(--color-primary)] shadow-[0_0_30px_rgba(0,190,255,0.4)] flex items-center justify-center relative bg-[var(--color-primary)]/10">
-                        <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-24 md:h-24 rounded-full border-2 border-[var(--color-primary)]/80 flex items-center justify-center">
-                          <div className="w-7 h-7 sm:w-10 sm:h-10 md:w-16 md:h-16 rounded-full border border-[var(--color-primary)] flex items-center justify-center text-white text-sm sm:text-lg md:text-2xl font-bold tracking-widest">
+                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border border-[var(--color-primary)] shadow-[0_0_30px_rgba(0,190,255,0.4)] flex items-center justify-center relative bg-[var(--color-primary)]/10">
+                        <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-[var(--color-primary)]/80 flex items-center justify-center">
+                          <div className="w-10 h-10 md:w-16 md:h-16 rounded-full border border-[var(--color-primary)] flex items-center justify-center text-white text-lg md:text-2xl font-bold tracking-widest">
                             国王
                           </div>
                         </div>
                       </div>
-                      <div className="mt-3 sm:mt-8 border border-[var(--color-primary)] rounded-full px-3 sm:px-4 md:px-6 py-1 sm:py-2 text-[var(--color-primary)] font-mono text-xs sm:text-sm md:text-lg tracking-widest">
+                      <div className="mt-8 border border-[var(--color-primary)] rounded-full px-4 md:px-6 py-2 text-[var(--color-primary)] font-mono text-sm md:text-lg tracking-widest">
                         ID: 9982
                       </div>
                     </div>
 
                     {/* Bridge */}
-                    <div className="flex-none sm:flex-1 w-full sm:w-auto h-10 sm:h-auto flex flex-row sm:flex-col items-center justify-center relative px-4 sm:px-2 md:px-4">
-                      <div className="px-2 md:px-4 py-1 sm:py-1.5 border border-gray-600 rounded-lg text-gray-300 text-[10px] sm:text-xs md:text-sm tracking-widest sm:mb-4 z-10 bg-black/50 backdrop-blur whitespace-nowrap">
+                    <div className="flex-1 flex flex-col items-center justify-center relative px-2 md:px-4">
+                      <div className="px-2 md:px-4 py-1.5 border border-gray-600 rounded-lg text-gray-300 text-xs md:text-sm tracking-widest mb-4 z-10 bg-black/50 backdrop-blur whitespace-nowrap">
                         离散 -{">"} 连续向量
                       </div>
                       {/* Dashed line with laser */}
-                      <div className="flex-1 sm:w-full h-[1px] border-b border-dashed border-gray-600 sm:absolute sm:top-1/2 sm:mt-3 md:mt-2"></div>
+                      <div className="w-full h-[1px] border-b border-dashed border-gray-600 absolute top-1/2 mt-3 md:mt-2"></div>
                       <motion.div
-                        className="h-1 w-1/4 bg-[var(--color-primary)] shadow-[0_0_15px_var(--color-primary)] hidden sm:block sm:absolute sm:top-1/2 sm:mt-[11px] md:mt-[7px] rounded-full"
+                        className="h-1 w-1/4 bg-[var(--color-primary)] shadow-[0_0_15px_var(--color-primary)] absolute top-1/2 mt-[11px] md:mt-[7px] rounded-full"
                         initial={{ left: "0%", opacity: 0 }}
                         animate={{ left: ["0%", "30%", "75%"], opacity: [0, 1, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
@@ -104,9 +104,9 @@ export default function SlideVector() {
 
                     {/* Matrix Lookup */}
                     <div className="flex flex-col items-center">
-                      <div className="text-sm sm:text-lg md:text-xl text-gray-300 mb-3 sm:mb-6 tracking-widest font-bold">词嵌入查询</div>
+                      <div className="text-lg md:text-xl text-gray-300 mb-6 tracking-widest font-bold">词嵌入查询</div>
                       {/* Abstract Grid */}
-                      <div className="border-2 border-indigo-900/50 rounded-xl bg-indigo-950/20 backdrop-blur w-24 h-32 sm:w-32 sm:h-48 md:w-48 md:h-64 p-2 flex flex-col justify-between relative overflow-hidden">
+                      <div className="border-2 border-indigo-900/50 rounded-xl bg-indigo-950/20 backdrop-blur w-32 h-48 md:w-48 md:h-64 p-2 flex flex-col justify-between relative overflow-hidden">
                         {/* Glowing Active Row corresponding to ID 9982. middle row */}
                         <motion.div
                           className="absolute left-0 right-0 h-8 md:h-10 top-[40%] bg-indigo-500/30 shadow-[0_0_30px_var(--color-primary)] z-0"
@@ -121,7 +121,7 @@ export default function SlideVector() {
                           ))}
                         </div>
                       </div>
-                      <div className="mt-3 sm:mt-8 border border-[var(--color-primary)] rounded-full px-3 sm:px-4 md:px-6 py-1 sm:py-2 text-[var(--color-primary)] font-mono text-xs sm:text-sm md:text-lg tracking-widest">
+                      <div className="mt-8 border border-[var(--color-primary)] rounded-full px-4 md:px-6 py-2 text-[var(--color-primary)] font-mono text-sm md:text-lg tracking-widest">
                         200000 X 8192
                       </div>
                     </div>
@@ -212,7 +212,7 @@ export default function SlideVector() {
                                 initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i }}
                               >
                                 <div className="w-[1px] h-4 bg-[var(--color-primary)]/50 mb-1"></div>
-                                <span className={`text-[8px] sm:text-[10px] md:text-sm text-[var(--color-primary-fixed-dim)] bg-[var(--color-primary)]/10 px-1 sm:px-2 py-0.5 rounded shadow ${i === activeData.length - 1 ? "hidden md:inline-block" : ""}`}>{FEATURE_LABELS[i]}</span>
+                                <span className={`text-[10px] md:text-sm text-[var(--color-primary-fixed-dim)] bg-[var(--color-primary)]/10 px-2 py-0.5 rounded shadow ${i === activeData.length - 1 ? "hidden md:inline-block" : ""}`}>{FEATURE_LABELS[i]}</span>
                               </motion.div>
                             )}
                           </AnimatePresence>
@@ -263,7 +263,7 @@ export default function SlideVector() {
                               initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * 6 }}
                             >
                               <div className="w-[1px] h-4 bg-[var(--color-primary)]/50 mb-1"></div>
-                              <span className="text-[8px] sm:text-[10px] md:text-sm text-[var(--color-primary-fixed-dim)] bg-[var(--color-primary)]/10 px-1 sm:px-2 py-0.5 rounded shadow">神性特征</span>
+                              <span className="text-[10px] md:text-sm text-[var(--color-primary-fixed-dim)] bg-[var(--color-primary)]/10 px-2 py-0.5 rounded shadow">神性特征</span>
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -292,7 +292,7 @@ export default function SlideVector() {
                     <AnimatePresence>
                       {(showFeatures && !startQuantize) && (
                         <motion.div
-                          className="absolute -bottom-24 sm:-bottom-28 w-full text-center z-0"
+                          className="absolute -bottom-28 w-full text-center z-0"
                           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                         >
                           <p className="text-[var(--color-secondary)] font-tech tracking-[0.1em] md:tracking-[0.3em] text-xs md:text-sm">
@@ -306,7 +306,7 @@ export default function SlideVector() {
                     <AnimatePresence>
                       {showScaleFactor && (
                         <motion.div
-                          className="absolute -top-48 md:-top-32 right-[0%] border border-[#fcd34d]/60 bg-gradient-to-br from-[#2a1305]/95 to-[#170800]/95 backdrop-blur-xl rounded-xl flex items-start px-4 md:px-6 py-4 shadow-[0_20px_60px_rgba(251,191,36,0.3)] z-50 pointer-events-auto max-w-[min(90vw,440px)]"
+                          className="absolute -top-48 md:-top-32 right-[0%] border border-[#fcd34d]/60 bg-gradient-to-br from-[#2a1305]/95 to-[#170800]/95 backdrop-blur-xl rounded-xl flex items-start px-4 md:px-6 py-4 shadow-[0_20px_60px_rgba(251,191,36,0.3)] z-50 pointer-events-auto"
                           initial={{ opacity: 0, y: 40, scale: 0.8 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: "spring", bounce: 0.4 }}
                         >
                           <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center mr-3 md:mr-4 border border-amber-400/50 mt-1 shrink-0">
@@ -344,7 +344,7 @@ export default function SlideVector() {
                     {showPrecision && !startQuantize && (
                       <motion.div
                         key="precision"
-                        className="mt-12 sm:mt-36 text-center bg-black/40 px-4 sm:px-6 py-3 rounded-full border border-yellow-500/30 font-body text-xs md:text-sm text-yellow-300 drop-shadow-md backdrop-blur-md max-w-[90vw]"
+                        className="mt-36 text-center bg-black/40 px-6 py-3 rounded-full border border-yellow-500/30 font-body text-xs md:text-sm text-yellow-300 whitespace-nowrap drop-shadow-md backdrop-blur-md"
                         initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                       >
                         显卡内存杀手：一个模型里有千百亿个这样的浮点数，存储量惊人！
@@ -353,7 +353,7 @@ export default function SlideVector() {
                     {showDetails && (
                       <motion.div
                         key="quant"
-                        className="mt-10 sm:mt-28 flex flex-col items-center gap-3 drop-shadow-lg z-40 pointer-events-auto px-4 sm:px-0"
+                        className="mt-32 flex flex-col items-center gap-3 drop-shadow-lg z-40 pointer-events-auto"
                         initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                       >
                         <div className="text-center bg-[#170505]/80 px-6 py-4 rounded-xl border border-red-500/30 font-body text-sm text-red-200 shadow-xl max-w-3xl leading-relaxed backdrop-blur-md">
@@ -370,7 +370,7 @@ export default function SlideVector() {
 
             {/* Back Card (Hardware & Naming info) */}
             <motion.div
-              className="absolute inset-0 flex flex-col items-center justify-start md:justify-center overflow-y-auto px-3 sm:px-6 md:px-12 w-full h-full pointer-events-auto pt-6 md:pt-0"
+              className="absolute inset-0 flex flex-col items-center justify-center px-4 md:px-12 w-full h-full pointer-events-auto"
               style={{ backfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
               initial={{ rotateY: -180 }}
               animate={{ rotateY: showHardwareCard ? 0 : -180 }}
@@ -378,21 +378,21 @@ export default function SlideVector() {
             >
               {showHardwareCard && (
                 <div className="w-full max-w-[90rem] mx-auto flex flex-col items-center">
-                  <div className="text-[var(--color-primary)] font-tech text-xl md:text-3xl tracking-[0.2em] mb-4 md:mb-10 drop-shadow-[0_0_15px_rgba(0,190,255,0.6)] text-center w-full">
+                  <div className="text-[var(--color-primary)] font-tech text-xl md:text-3xl tracking-[0.2em] mb-12 drop-shadow-[0_0_15px_rgba(0,190,255,0.6)] text-center w-full">
                     算力与存储的现实碰撞
                     <div className="text-sm md:text-base text-[var(--color-primary)]/50 mt-2 font-mono tracking-widest uppercase">The Reality of Compute & Storage</div>
                   </div>
 
-                  <div className="flex flex-col md:flex-row gap-4 md:gap-8 w-full pb-6 md:pb-0">
+                  <div className="flex flex-col md:flex-row gap-8 w-full">
                     {/* Left Panel: Hardware Storage */}
-                    <div className="flex-1 bg-gradient-to-br from-[#0a1526]/80 to-[#02050a]/90 border border-blue-900/50 rounded-2xl p-4 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                      <div className="flex items-center mb-3 md:mb-6 border-b border-blue-900/50 pb-2 md:pb-4">
+                    <div className="flex-1 bg-gradient-to-br from-[#0a1526]/80 to-[#02050a]/90 border border-blue-900/50 rounded-2xl p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                      <div className="flex items-center mb-6 border-b border-blue-900/50 pb-4">
                         <svg className="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
                         <h3 className="text-blue-200 text-lg md:text-xl font-bold tracking-widest font-body">显存容量危机 (VRAM Bottleneck)</h3>
                       </div>
                       
-                      <div className="space-y-3 md:space-y-6">
-                        <div className="bg-blue-950/30 p-3 md:p-5 rounded-xl border border-blue-900/30">
+                      <div className="space-y-6">
+                        <div className="bg-blue-950/30 p-4 md:p-5 rounded-xl border border-blue-900/30">
                           <div className="text-blue-300 text-xs md:text-sm mb-3 font-mono flex items-center justify-between">
                             <span>Llama-3 70B (700亿参数)</span>
                             <span className="text-blue-100 bg-blue-900/50 px-2 rounded">FP16 (半精度)</span>
@@ -406,7 +406,7 @@ export default function SlideVector() {
                           </p>
                         </div>
 
-                        <div className="bg-red-950/30 p-3 md:p-5 rounded-xl border border-red-900/30 relative overflow-hidden">
+                        <div className="bg-red-950/30 p-4 md:p-5 rounded-xl border border-red-900/30 relative overflow-hidden">
                           <div className="absolute right-0 top-0 w-24 h-24 bg-red-500/10 rounded-bl-full blur-xl"></div>
                           <div className="text-red-300 text-xs md:text-sm mb-3 font-mono flex items-center justify-between z-10 relative">
                             <span>Llama-3 70B (700亿参数)</span>
@@ -424,14 +424,14 @@ export default function SlideVector() {
                     </div>
 
                     {/* Middle Panel: Chip Ecosystem */}
-                    <div className="flex-1 bg-gradient-to-br from-[#051a15]/90 to-[#020a07]/95 border border-emerald-900/50 rounded-2xl p-4 md:p-8 shadow-[0_10px_40px_rgba(16,185,129,0.1)] backdrop-blur-md">
-                      <div className="flex items-center mb-3 md:mb-6 border-b border-emerald-900/50 pb-2 md:pb-4">
+                    <div className="flex-1 bg-gradient-to-br from-[#051a15]/90 to-[#020a07]/95 border border-emerald-900/50 rounded-2xl p-6 md:p-8 shadow-[0_10px_40px_rgba(16,185,129,0.1)] backdrop-blur-md">
+                      <div className="flex items-center mb-6 border-b border-emerald-900/50 pb-4">
                         <svg className="w-6 h-6 text-emerald-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
                         <h3 className="text-emerald-200 text-lg md:text-xl font-bold tracking-widest font-body">硬件阵营与推理格式</h3>
                       </div>
 
-                      <div className="space-y-3 md:space-y-4">
-                        <div className="bg-emerald-950/30 p-3 md:p-4 rounded-xl border border-emerald-900/30">
+                      <div className="space-y-4">
+                        <div className="bg-emerald-950/30 p-4 rounded-xl border border-emerald-900/30">
                           <div className="flex items-center gap-2 mb-2">
                             <span className="text-emerald-400 font-bold">NVIDIA (CUDA)</span>
                             <span className="text-[10px] bg-emerald-900/50 text-emerald-200 px-1 rounded">高性能</span>
@@ -444,7 +444,7 @@ export default function SlideVector() {
                           </p>
                         </div>
 
-                        <div className="bg-emerald-950/30 p-3 md:p-5 rounded-xl border border-emerald-900/30 relative overflow-hidden">
+                        <div className="bg-emerald-950/30 p-4 md:p-5 rounded-xl border border-emerald-900/30 relative overflow-hidden">
                           <div className="absolute right-0 top-0 w-20 h-20 bg-emerald-500/10 rounded-bl-full blur-xl"></div>
                           <div className="flex items-center gap-2 mb-2 relative z-10">
                             <span className="text-emerald-300 font-bold text-base md:text-lg drop-shadow-[0_0_5px_rgba(52,211,153,0.5)]">Apple Silicon (苹果)</span>
@@ -473,13 +473,13 @@ export default function SlideVector() {
                     </div>
 
                     {/* Right Panel: Naming Convention */}
-                    <div className="flex-1 bg-gradient-to-br from-[#1a0f05]/90 to-[#0d0702]/95 border border-amber-900/50 rounded-2xl p-4 md:p-8 shadow-[0_10px_40px_rgba(251,191,36,0.1)] backdrop-blur-md">
-                       <div className="flex items-center mb-3 md:mb-6 border-b border-amber-900/50 pb-2 md:pb-4">
+                    <div className="flex-1 bg-gradient-to-br from-[#1a0f05]/90 to-[#0d0702]/95 border border-amber-900/50 rounded-2xl p-6 md:p-8 shadow-[0_10px_40px_rgba(251,191,36,0.1)] backdrop-blur-md">
+                       <div className="flex items-center mb-6 border-b border-amber-900/50 pb-4">
                         <svg className="w-6 h-6 text-amber-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                         <h3 className="text-amber-200 text-lg md:text-xl font-bold tracking-widest font-body">量化名称脱盲 (Naming Decode)</h3>
                       </div>
 
-                      <div className="bg-black/60 rounded-xl p-3 md:p-5 border border-amber-500/20 mb-4 md:mb-8 shadow-inner relative">
+                      <div className="bg-black/60 rounded-xl p-4 md:p-5 border border-amber-500/20 mb-8 shadow-inner relative">
                         <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,rgba(251,191,36,0.02),rgba(251,191,36,0.02)_10px,transparent_10px,transparent_20px)] rounded-xl"></div>
                         <div className="font-mono text-[11px] md:text-sm tracking-wide flex flex-col gap-2 relative z-10">
                            <span className="text-gray-400 text-[10px] md:text-xs tracking-widest mb-1">常见的民间下载后缀名：</span>
@@ -492,7 +492,7 @@ export default function SlideVector() {
                         </div>
                       </div>
 
-                      <div className="space-y-4 md:space-y-6">
+                      <div className="space-y-6">
                         <div className="flex gap-4">
                           <div className="w-12 h-8 shrink-0 bg-red-950/50 border border-red-500/30 rounded flex items-center justify-center text-red-400 font-mono text-sm font-bold shadow-[0_0_10px_rgba(220,38,38,0.2)]">Q4</div>
                           <div className="flex flex-col">

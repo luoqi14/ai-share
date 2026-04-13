@@ -175,12 +175,12 @@ export default function SlideEmbedding() {
 
               {/* 4. LM Head */}
               <motion.div
-                className="flex flex-col items-center relative z-10 group pointer-events-auto cursor-pointer"
+                className="flex flex-col items-center relative z-10 ml-8 group pointer-events-auto cursor-pointer"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: showLMHead ? 1 : 0, x: showLMHead ? 0 : -20 }}
                 transition={{ duration: FADE_DURATION, delay: CONNECTOR_DURATION * 0.5 }}
               >
-                <div className="w-[clamp(56px,9vw,128px)] h-[clamp(42px,7vw,96px)] border border-[#ffc83c]/40 bg-[#ffc83c]/5 relative overflow-hidden shadow-[0_0_20px_rgba(255,200,60,0.1)] rounded-sm">
+                <div className="w-32 h-24 border border-[#ffc83c]/40 bg-[#ffc83c]/5 relative overflow-hidden shadow-[0_0_20px_rgba(255,200,60,0.1)] rounded-sm">
                   {/* Grid Pattern */}
                   <div className="absolute inset-0 flex flex-col justify-between py-1">
                     {[...Array(4)].map((_, i) => (
@@ -208,7 +208,7 @@ export default function SlideEmbedding() {
                 animate={{ opacity: showSoftmax ? 1 : 0, x: showSoftmax ? 0 : -20 }}
                 transition={{ duration: FADE_DURATION, delay: CONNECTOR_DURATION * 0.5 }}
               >
-                <div className="w-[clamp(44px,7vw,96px)] h-[clamp(44px,7vw,96px)] flex items-end justify-between px-0.5 pb-0.5 gap-[clamp(0.5px,0.15vw,4px)] relative overflow-hidden">
+                <div className="w-24 h-24 flex items-end justify-between px-1 pb-1 gap-1 relative overflow-hidden">
                   {/* Gradient overlay for tail */}
                   <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[var(--color-background)] to-transparent z-10" />
 
@@ -219,7 +219,7 @@ export default function SlideEmbedding() {
                       initial={{ height: 0 }}
                       animate={{ height: showSoftmax ? `${h}%` : 0 }}
                       transition={{ duration: 0.6, delay: showSoftmax ? CONNECTOR_DURATION + i * 0.05 : 0, type: "spring", stiffness: 80 }}
-                      className={`w-[clamp(1.5px,0.25vw,10px)] rounded-t-sm shadow-[0_0_8px_rgba(0,240,255,0.3)] ${i === 0 ? "bg-[var(--color-primary)]" : "bg-[#50ffa0]/60"
+                      className={`w-2.5 rounded-t-sm shadow-[0_0_8px_rgba(0,240,255,0.3)] ${i === 0 ? "bg-[var(--color-primary)]" : "bg-[#50ffa0]/60"
                         }`}
                     />
                   ))}
@@ -233,7 +233,7 @@ export default function SlideEmbedding() {
               <AnimatePresence>
                 {showLoop && (
                   <motion.div
-                    className="absolute inset-x-0 -top-[clamp(80px,14vh,160px)] h-[clamp(100px,18vh,200px)] z-20 pointer-events-none"
+                    className="absolute inset-x-0 -top-[160px] h-[200px] z-20 pointer-events-none"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -264,7 +264,7 @@ export default function SlideEmbedding() {
                       />
                     </svg>
                     <motion.div
-                      className="absolute left-1/2 top-4 -translate-x-1/2 text-[var(--color-background)] font-bold text-xs sm:text-sm md:text-base bg-[var(--color-primary)] px-3 py-1.5 sm:px-6 sm:py-2 rounded-full shadow-[0_0_20px_var(--color-primary-container)] text-center max-w-[80vw] z-30"
+                      className="absolute left-1/2 top-4 -translate-x-1/2 text-[var(--color-background)] font-bold text-sm md:text-base bg-[var(--color-primary)] px-6 py-2 rounded-full shadow-[0_0_20px_var(--color-primary-container)] whitespace-nowrap z-30"
                       initial={{ y: 10, opacity: 0, scale: 0.9 }}
                       animate={{ y: 0, opacity: 1, scale: 1 }}
                       transition={{ delay: 1.2, duration: 0.5, type: "spring" }}
@@ -286,13 +286,13 @@ export default function SlideEmbedding() {
 // ─── Reusable Animated Connector ──────────────────────────────────────────────
 function Connector({ show, label }: { show: boolean; label?: string }) {
   return (
-    <div className="flex-1 h-12 relative mx-[clamp(2px,1vw,16px)] z-0 flex items-center justify-center">
+    <div className="flex-1 h-12 relative mx-4 z-0 flex items-center justify-center">
       {label && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: show ? 0.9 : 0, y: show ? 0 : 10 }}
           transition={{ delay: CONNECTOR_DURATION * 0.8, duration: 0.3 }}
-          className="absolute -top-8 text-[9px] sm:text-[11px] font-mono tracking-wider text-[var(--color-primary)] bg-[var(--color-background)] px-1 sm:px-2 whitespace-nowrap shadow-sm border border-[var(--color-primary)]/30 rounded hidden sm:block"
+          className="absolute -top-8 text-[11px] font-mono tracking-wider text-[var(--color-primary)] bg-[var(--color-background)] px-2 whitespace-nowrap shadow-sm border border-[var(--color-primary)]/30 rounded"
         >
           {label}
         </motion.div>

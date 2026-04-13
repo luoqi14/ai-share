@@ -286,13 +286,13 @@ export default function SlideEmbedding() {
 // ─── Reusable Animated Connector ──────────────────────────────────────────────
 function Connector({ show, label }: { show: boolean; label?: string }) {
   return (
-    <div className="flex-1 h-12 relative mx-[clamp(2px,1vw,16px)] z-0 flex items-center justify-center">
+    <div className="flex-1 h-12 relative mx-4 z-0 flex items-center justify-center">
       {label && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: show ? 0.9 : 0, y: show ? 0 : 10 }}
           transition={{ delay: CONNECTOR_DURATION * 0.8, duration: 0.3 }}
-          className="absolute -top-8 text-[9px] sm:text-[11px] font-mono tracking-wider text-[var(--color-primary)] bg-[var(--color-background)] px-1 sm:px-2 whitespace-nowrap shadow-sm border border-[var(--color-primary)]/30 rounded hidden sm:block"
+          className="absolute -top-8 text-[11px] font-mono tracking-wider text-[var(--color-primary)] bg-[var(--color-background)] px-2 whitespace-nowrap shadow-sm border border-[var(--color-primary)]/30 rounded"
         >
           {label}
         </motion.div>

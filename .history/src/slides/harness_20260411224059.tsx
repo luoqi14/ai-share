@@ -97,7 +97,7 @@ export default function SlideHarness() {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <h2 className="text-gradient font-display text-xl sm:text-[32px] font-medium mb-4 sm:mb-8">
+                    <h2 className="text-gradient font-display text-[32px] font-medium mb-8">
                       “全自主调度”的灾难
                     </h2>
                     <div className="flex flex-col gap-6 text-white/70 text-[15px] leading-relaxed">
@@ -123,7 +123,7 @@ export default function SlideHarness() {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <h2 className="text-gradient font-display text-xl sm:text-[32px] font-medium mb-4 sm:mb-8">
+                    <h2 className="text-gradient font-display text-[32px] font-medium mb-8">
                       铁打的流水线，流水的 AI
                     </h2>
                     <div className="flex flex-col gap-6 text-white/70 text-[15px] leading-relaxed">
@@ -149,7 +149,7 @@ export default function SlideHarness() {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <h2 className="text-gradient font-display text-xl sm:text-[32px] font-medium mb-4 sm:mb-8">
+                    <h2 className="text-gradient font-display text-[32px] font-medium mb-8">
                       顶级智能体的分野
                     </h2>
                     <div className="flex flex-col gap-6 text-white/70 text-[15px] leading-relaxed">
@@ -180,7 +180,7 @@ export default function SlideHarness() {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <h2 className="text-gradient font-display text-xl sm:text-[32px] font-medium mb-4 sm:mb-8">
+                    <h2 className="text-gradient font-display text-[32px] font-medium mb-8">
                       任务拆分与 Subagent
                     </h2>
                     <div className="flex flex-col gap-5 text-white/70 text-[15px] leading-relaxed">
@@ -207,7 +207,7 @@ export default function SlideHarness() {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <h2 className="text-gradient font-display text-xl sm:text-[32px] font-medium mb-4 sm:mb-8">
+                    <h2 className="text-gradient font-display text-[32px] font-medium mb-8">
                       反馈循环与独立审查
                     </h2>
                     <div className="flex flex-col gap-6 text-white/70 text-[15px] leading-relaxed">
@@ -233,7 +233,7 @@ export default function SlideHarness() {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <h2 className="text-gradient font-display text-xl sm:text-[32px] font-medium mb-4 sm:mb-8">
+                    <h2 className="text-gradient font-display text-[32px] font-medium mb-8">
                       熵的降维打击 (状态清理)
                     </h2>
                     <div className="flex flex-col gap-6 text-white/70 text-[15px] leading-relaxed">
@@ -265,12 +265,12 @@ export default function SlideHarness() {
                 {step === 3 && (
                   <motion.div
                     key="visual-1"
-                    className="absolute inset-0 flex items-center justify-center p-4 sm:p-12"
+                    className="absolute inset-0 flex items-center justify-center p-12"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 1.05 }}
                   >
-                    <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+                    <div className="relative w-80 h-80 flex items-center justify-center">
                       <motion.div className="w-32 h-32 bg-error/20 rounded-full blur-2xl absolute" animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} />
                       <div className="relative z-10 w-24 h-24 bg-black/80 border-2 border-error/50 rounded-3xl flex items-center justify-center shadow-[0_0_50px_rgba(var(--color-error),0.4)]">
                         <span className="text-4xl animate-pulse">🤖</span>
@@ -293,7 +293,7 @@ export default function SlideHarness() {
                 {step >= 4 && step <= 5 && (
                   <motion.div
                     key="visual-2"
-                    className="absolute inset-0 flex flex-col justify-center items-center p-4 sm:p-8 md:p-12 bg-black/20 overflow-y-auto"
+                    className="absolute inset-0 flex flex-col justify-center items-center p-12 bg-black/20"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -344,17 +344,17 @@ export default function SlideHarness() {
                 {step === 7 && (
                   <motion.div
                     key="visual-3"
-                    className="absolute inset-0 flex items-center justify-center p-3 sm:p-8 md:p-12 bg-black/20 overflow-y-auto"
+                    className="absolute inset-0 flex items-center justify-center p-12 bg-black/20"
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
                   >
-                    <div className="w-full sm:w-[85%] bg-gradient-to-br from-[#121A2F] to-[#0A0F15] border border-blue-400/30 p-4 sm:p-8 rounded-3xl shadow-[0_0_60px_rgba(96,165,250,0.15)] relative overflow-hidden group">
+                    <div className="w-[85%] bg-gradient-to-br from-[#121A2F] to-[#0A0F15] border border-blue-400/30 p-8 rounded-3xl shadow-[0_0_60px_rgba(96,165,250,0.15)] relative overflow-hidden group">
                       <div className="absolute -top-4 -right-4 p-4 font-display text-[80px] text-blue-400/5 font-bold italic group-hover:scale-110 transition-transform duration-700 pointer-events-none">HERMES</div>
                       <div className="absolute top-6 left-6 bg-blue-500/20 text-blue-400 text-[11px] font-bold px-3 py-1 rounded tracking-widest uppercase">正面标杆</div>
 
                       <div className="mt-8 flex flex-col gap-4 relative z-10">
-                        <h3 className="text-xl sm:text-[28px] font-display text-white font-bold drop-shadow-md">Hermes Agent</h3>
+                        <h3 className="text-[28px] font-display text-white font-bold drop-shadow-md">Hermes Agent</h3>
                         <p className="text-[14px] text-white/50 tracking-widest font-tech uppercase mb-1 border-b border-white/10 pb-4">自带 Harness 与记忆的灵魂</p>
 
                         <div className="text-[15px] text-white/70 leading-[1.8] mt-2">
@@ -381,7 +381,7 @@ export default function SlideHarness() {
                 {step === 8 && (
                   <motion.div
                     key="visual-4"
-                    className="absolute inset-0 flex flex-col justify-center items-center py-4 sm:py-8 px-3 sm:px-8 overflow-y-auto"
+                    className="absolute inset-0 flex flex-col justify-center items-center py-10 px-8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -407,7 +407,7 @@ export default function SlideHarness() {
                       </div>
 
                       {/* Subagent B */}
-                      <div className="bg-[#111] p-5 rounded-2xl border-l-[3px] border-l-secondary border-t border-r border-b border-white/5 shadow-xl flex items-start gap-4 sm:translate-x-4">
+                      <div className="bg-[#111] p-5 rounded-2xl border-l-[3px] border-l-secondary border-t border-r border-b border-white/5 shadow-xl flex items-start gap-4 transform translate-x-4">
                         <div className="text-3xl mt-1 shrink-0 drop-shadow-lg opacity-90 grayscale">👨‍⚕️</div>
                         <div className="flex flex-col gap-1 w-full">
                           <div className="text-[15px] font-bold text-secondary tracking-wide border-b border-white/5 pb-2 mb-1">
@@ -426,7 +426,7 @@ export default function SlideHarness() {
                       </div>
 
                       {/* Subagent C */}
-                      <div className="bg-[#111] p-5 rounded-2xl border-l-[3px] border-l-blue-400 border-t border-r border-b border-white/5 shadow-xl flex items-start gap-4 sm:translate-x-8">
+                      <div className="bg-[#111] p-5 rounded-2xl border-l-[3px] border-l-blue-400 border-t border-r border-b border-white/5 shadow-xl flex items-start gap-4 transform translate-x-8">
                         <div className="text-3xl mt-1 shrink-0 drop-shadow-lg">📊</div>
                         <div className="flex flex-col gap-1 w-full">
                           <div className="text-[15px] font-bold text-blue-400 tracking-wide border-b border-white/5 pb-2 mb-1">
@@ -451,12 +451,12 @@ export default function SlideHarness() {
                 {step === 9 && (
                   <motion.div
                     key="visual-5"
-                    className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 md:p-12 bg-black/20 overflow-y-auto"
+                    className="absolute inset-0 flex items-center justify-center p-12 bg-black/20"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <div className="flex flex-col items-center gap-4 sm:gap-6 w-full">
+                    <div className="flex flex-col items-center gap-6 w-full">
                       {/* Generation Box */}
                       <div className="bg-[#1A1A1A] border border-white/10 px-6 py-4 rounded-xl text-white/80 text-[14px] flex items-center gap-3 shadow-lg">
                         <span className="text-xl grayscale">🤖</span> 前端输出营销话术草稿...
@@ -474,7 +474,7 @@ export default function SlideHarness() {
                       </div>
 
                       {/* Forking outputs */}
-                      <div className="flex w-full justify-between mt-2 pt-4 relative px-2 sm:px-8">
+                      <div className="flex w-full justify-between mt-2 pt-4 relative px-8">
                         {/* Red Flow */}
                         <div className="flex flex-col items-center gap-3 w-1/2">
                           <div className="text-error text-3xl font-bold animate-pulse">⬇</div>
@@ -507,13 +507,13 @@ export default function SlideHarness() {
                 {step === 10 && (
                   <motion.div
                     key="visual-6"
-                    className="absolute inset-0 flex flex-col sm:flex-row items-center justify-between p-4 sm:p-8 md:p-12 bg-black/30 gap-4 sm:gap-0 overflow-y-auto"
+                    className="absolute inset-0 flex items-center justify-between p-12 bg-black/30"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
                     {/* Messy unstructured area */}
-                    <div className="flex flex-col gap-3 relative w-full sm:w-1/3 h-[140px] sm:h-[70%] justify-center border-b sm:border-b-0 sm:border-r border-dashed border-white/20 sm:pr-6 shrink-0">
+                    <div className="flex flex-col gap-3 relative w-1/3 h-[70%] justify-center border-r border-dashed border-white/20 pr-6">
                       <motion.div className="absolute top-10 left-0 bg-white/5 p-2 rounded text-[11px] text-white/50 blur-[1px]">这几个月业绩怎么不好</motion.div>
                       <motion.div className="absolute top-28 right-4 bg-white/10 p-2 rounded text-[11px] text-white/70">你觉得洗牙痛不痛啊</motion.div>
                       <motion.div className="absolute bottom-24 left-2 bg-error/10 border border-error/20 p-2 rounded text-[11px] text-error/80 z-10 shadow-lg">我的预算勉强2万块吧</motion.div>
@@ -524,7 +524,7 @@ export default function SlideHarness() {
                     </div>
 
                     {/* Vacuum GC */}
-                    <div className="flex flex-col items-center justify-center relative w-full sm:w-1/3 text-primary group shrink-0">
+                    <div className="flex flex-col items-center justify-center relative w-1/3 text-primary group">
                       <span className="text-6xl mb-4 group-hover:scale-125 transition-transform drop-shadow-[0_0_20px_rgba(var(--color-primary),0.6)]">🧹</span>
                       <span className="font-bold tracking-widest text-[14px] bg-primary/10 px-4 py-2 rounded-xl shadow-lg border border-primary/30 text-center relative z-10 backdrop-blur-md">
                         后台清理聚合<br />
@@ -541,7 +541,7 @@ export default function SlideHarness() {
                     </div>
 
                     {/* Clean DB */}
-                    <div className="flex flex-col gap-3 w-full sm:w-1/3 bg-[#080808] border border-secondary/40 p-4 sm:p-6 rounded-2xl shadow-[0_0_40px_rgba(var(--color-secondary),0.15)] h-auto sm:h-[60%] sm:ml-4">
+                    <div className="flex flex-col gap-3 w-1/3 bg-[#080808] border border-secondary/40 p-6 rounded-2xl shadow-[0_0_40px_rgba(var(--color-secondary),0.15)] h-[60%] ml-4">
                       <div className="flex items-center gap-3 border-b border-white/10 pb-3">
                         <span className="text-secondary text-2xl drop-shadow-md">🗄️</span>
                         <span className="text-white/90 text-[14px] font-bold tracking-widest">结构化记忆数据库</span>
@@ -569,7 +569,7 @@ export default function SlideHarness() {
           {step === 11 && (
             <motion.div
               key="climax"
-              className="absolute inset-0 z-50 flex items-center justify-center p-6 sm:p-12 md:p-16 overflow-y-auto"
+              className="absolute inset-0 z-50 flex items-center justify-center p-16"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -578,7 +578,7 @@ export default function SlideHarness() {
               <div className="absolute inset-0 bg-[#06080A]/80 backdrop-blur-2xl"></div>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(var(--color-primary),0.08)_0%,transparent_70%)]"></div>
 
-              <div className="relative z-10 max-w-4xl text-center flex flex-col items-center gap-4 sm:gap-8 md:gap-10">
+              <div className="relative z-10 max-w-4xl text-center flex flex-col items-center gap-10">
                 <motion.div
                   className="text-6xl text-primary drop-shadow-[0_0_30px_rgba(var(--color-primary),1)] animate-pulse"
                   initial={{ scale: 0.5, opacity: 0 }}
@@ -588,11 +588,11 @@ export default function SlideHarness() {
                   💡
                 </motion.div>
 
-                <h1 className="text-2xl sm:text-[42px] font-display font-bold text-white tracking-[0.2em] drop-shadow-2xl">
+                <h1 className="text-[42px] font-display font-bold text-white tracking-[0.2em] drop-shadow-2xl">
                   工业级 Agent 时代降临
                 </h1>
 
-                <div className="text-sm sm:text-[17px] text-white/80 leading-[2] sm:leading-[2.2] text-justify tracking-wide font-medium bg-black/20 p-4 sm:p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl relative">
+                <div className="text-[17px] text-white/80 leading-[2.2] text-justify tracking-wide font-medium bg-black/20 p-10 rounded-3xl border border-white/10 shadow-2xl relative">
                   <div className="absolute -top-4 -left-4 text-6xl text-primary/20 pointer-events-none font-display">&ldquo;</div>
                   <div className="absolute -bottom-10 -right-4 text-6xl text-primary/20 pointer-events-none font-display">&rdquo;</div>
 
@@ -613,7 +613,7 @@ export default function SlideHarness() {
           {step === 12 && (
             <motion.div
               key="shrimp-farmer"
-              className="absolute inset-0 z-[60] flex items-center justify-center p-6 sm:p-12 md:p-16 overflow-y-auto"
+              className="absolute inset-0 z-[60] flex items-center justify-center p-16"
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
@@ -621,9 +621,9 @@ export default function SlideHarness() {
               <div className="absolute inset-0 bg-[#040A0F]/90 backdrop-blur-3xl"></div>
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(var(--color-secondary),0.05)_0%,transparent_60%)]"></div>
 
-              <div className="relative z-10 max-w-4xl text-center flex flex-col items-center gap-4 sm:gap-8">
+              <div className="relative z-10 max-w-4xl text-center flex flex-col items-center gap-8">
                 <motion.div
-                  className="text-5xl sm:text-7xl drop-shadow-[0_0_30px_rgba(var(--color-secondary),0.4)]"
+                  className="text-7xl drop-shadow-[0_0_30px_rgba(var(--color-secondary),0.4)]"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3, type: "spring", bounce: 0.4 }}
@@ -631,11 +631,11 @@ export default function SlideHarness() {
                   🦐
                 </motion.div>
 
-                <h1 className="text-2xl sm:text-[40px] font-display font-bold text-white tracking-[0.1em] drop-shadow-xl mt-1 sm:mt-2 mb-2 sm:mb-4">
+                <h1 className="text-[40px] font-display font-bold text-white tracking-[0.1em] drop-shadow-xl mt-2 mb-4">
                   做顶配 AI 时代的“<span className="text-secondary drop-shadow-[0_0_10px_rgba(var(--color-secondary),0.5)] border-b-2 border-secondary/50 pb-1">专业养虾人</span>”
                 </h1>
 
-                <div className="text-sm sm:text-[16px] text-white/80 leading-[2] sm:leading-[2.2] text-justify tracking-wide bg-secondary/5 p-4 sm:p-8 md:p-10 rounded-2xl border border-secondary/20 shadow-[0_0_50px_rgba(var(--color-secondary),0.05)] relative w-full">
+                <div className="text-[16px] text-white/80 leading-[2.2] text-justify tracking-wide bg-secondary/5 p-10 rounded-2xl border border-secondary/20 shadow-[0_0_50px_rgba(var(--color-secondary),0.05)] relative w-full">
                   <p className="mb-5 indent-8">
                     既然我们已经看透了那些“全自动 AI 代替人类”的虚假神话，明白了 AI 依然会脱轨、会幻觉、会犯错……
                   </p>
@@ -647,7 +647,7 @@ export default function SlideHarness() {
 
                   <p className="text-center font-bold text-[18px]">
                     而做好一个养虾人，最核心的起点：<br />
-                    <span className="text-secondary text-lg sm:text-[24px] tracking-wide inline-block mt-3 sm:mt-4 drop-shadow-md">
+                    <span className="text-secondary text-[24px] tracking-wide inline-block mt-4 drop-shadow-md">
                       身体力行，从每天接触、使用主流 AI 开始！
                     </span>
                   </p>

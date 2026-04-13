@@ -215,11 +215,11 @@ export default function SlideVectorSpace() {
             <AnimatePresence>
               {!sceneGeneralize && (
                 <motion.div
-                  className="w-full h-6 sm:flex-1 sm:h-auto flex sm:flex-col items-center justify-center relative px-4 shrink-0 sm:mt-8"
+                  className="flex-1 flex flex-col items-center justify-center relative px-4 shrink-0 mt-8"
                   exit={{ opacity: 0, scale: 0.9 }}
                 >
                   <motion.div
-                    className="text-[10px] md:text-xs text-[var(--color-primary-fixed-dim)] font-tech tracking-wider whitespace-nowrap -mt-10 mb-2 opacity-80 hidden sm:block"
+                    className="text-[10px] md:text-xs text-[var(--color-primary-fixed-dim)] font-tech tracking-wider whitespace-nowrap -mt-10 mb-2 opacity-80"
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} exit={{ opacity: 0 }}
                   >
                     EMBEDDING 映射法则
@@ -253,18 +253,18 @@ export default function SlideVectorSpace() {
 
             {/* 3. Right Column: Continuous 3D Isometric View */}
             <motion.div
-              className="flex-1 flex items-center justify-center relative overflow-visible"
-              initial={{ width: isSmall ? "100%" : "55%", translateX: "0%" }}
+              className="h-full flex items-center justify-center relative overflow-visible"
+              initial={{ width: "55%", translateX: "-5%" }}
               animate={{
-                width: isSmall ? "100%" : (sceneGeneralize ? "100%" : "55%"),
-                translateX: isSmall ? "0%" : (sceneGeneralize ? "0%" : "-5%"),
+                width: sceneGeneralize ? "100%" : "55%",
+                translateX: sceneGeneralize ? "0%" : "-5%"
               }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
             >
               <AnimatePresence>
                 {!sceneGeneralize && (
                   <motion.div
-                    className="absolute top-0 text-[var(--color-primary)] font-bold tracking-widest font-tech text-xs md:text-sm uppercase text-shadow-primary z-20 text-center sm:whitespace-nowrap"
+                    className="absolute top-0 text-[var(--color-primary)] font-bold tracking-widest font-tech text-xs md:text-sm uppercase text-shadow-primary z-20 whitespace-nowrap"
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} exit={{ opacity: 0 }}
                   >
                     连续宇宙 / CONTINUOUS SPACE
@@ -521,7 +521,7 @@ export default function SlideVectorSpace() {
                 {showCompletingArrows && (
                   <motion.div
                     key="scene1"
-                    className="absolute -bottom-4 md:bottom-12 text-[var(--color-primary-fixed-dim)] tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-3 sm:px-6 py-2 sm:py-3 rounded-full border border-[var(--color-primary)]/30 backdrop-blur-md max-w-[90vw]"
+                    className="absolute -bottom-4 md:bottom-12 text-[var(--color-primary-fixed-dim)] tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-6 py-3 rounded-full border border-[var(--color-primary)]/30 backdrop-blur-md whitespace-nowrap"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                   >
                     特征向量严格平行 —— 语义关系转化为精确的几何关系
@@ -530,7 +530,7 @@ export default function SlideVectorSpace() {
                 {sceneAlign && (
                   <motion.div
                     key="scene2"
-                    className="absolute -bottom-4 md:bottom-12 text-[#e879f9] tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-3 sm:px-6 py-2 sm:py-3 rounded-full border border-[#f5d0fe]/30 backdrop-blur-md max-w-[90vw]"
+                    className="absolute -bottom-4 md:bottom-12 text-[#e879f9] tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-6 py-3 rounded-full border border-[#f5d0fe]/30 backdrop-blur-md whitespace-nowrap"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ delay: 2.5 }}
                   >
                     多模态对齐 (Alignment) —— 将视觉与文本拉平在同一个高维度宇宙
@@ -539,7 +539,7 @@ export default function SlideVectorSpace() {
                 {showInterpolation && !sceneGeneralize && (
                   <motion.div
                     key="scene3"
-                    className="absolute -bottom-4 md:bottom-12 text-[#fcd34d] tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-3 sm:px-6 py-2 sm:py-3 rounded-full border border-[#fbbf24]/30 backdrop-blur-md drop-shadow-lg max-w-[90vw]"
+                    className="absolute -bottom-4 md:bottom-12 text-[#fcd34d] tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-6 py-3 rounded-full border border-[#fbbf24]/30 backdrop-blur-md whitespace-nowrap drop-shadow-lg"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ delay: 2.5 }}
                     style={{ color: "#fcd34d" }}
                   >
@@ -549,7 +549,7 @@ export default function SlideVectorSpace() {
                 {sceneGeneralize && !showHallucination && (
                   <motion.div
                     key="scene4"
-                    className="absolute -bottom-4 md:bottom-12 tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-3 sm:px-6 py-2 sm:py-3 rounded-full border border-red-400/30 backdrop-blur-md drop-shadow-lg z-30 max-w-[90vw]"
+                    className="absolute -bottom-4 md:bottom-12 tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-6 py-3 rounded-full border border-red-400/30 backdrop-blur-md drop-shadow-lg z-30"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ delay: 1.5 }}
                   >
                     <span className="text-red-400 font-bold mr-2">泛化推断 / Generalization :</span>
@@ -559,7 +559,7 @@ export default function SlideVectorSpace() {
                 {showHallucination && (
                   <motion.div
                     key="scene5"
-                    className="absolute -bottom-4 md:bottom-12 tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-3 sm:px-6 py-2 sm:py-3 rounded-full border border-[#c084fc]/30 backdrop-blur-md drop-shadow-lg z-30 max-w-[90vw]"
+                    className="absolute -bottom-4 md:bottom-12 tracking-widest font-body text-xs md:text-sm text-center bg-black/40 px-6 py-3 rounded-full border border-[#c084fc]/30 backdrop-blur-md drop-shadow-lg z-30"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ delay: 2 }}
                   >
                     <span className="text-[#c084fc] font-bold mr-2">双刃剑 / Hallucination :</span> 

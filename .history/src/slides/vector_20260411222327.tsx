@@ -66,7 +66,7 @@ export default function SlideVector() {
               {showMatrixScene && (
                 <motion.div
                   key="matrix-scene"
-                  className="absolute inset-0 flex items-center justify-start sm:justify-center overflow-y-auto pt-4 sm:pt-10"
+                  className="absolute inset-0 flex items-center justify-center pt-10"
                   initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >

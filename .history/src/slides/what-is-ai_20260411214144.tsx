@@ -167,44 +167,42 @@ export default function SlideWhatIsAI() {
       <SlideTitle title="AI大模型" label="LMM (Large Multimodal Model)" moved={showBox} />
 
       {/* ====== Central Layout: Inputs | Box | Outputs ====== */}
-      <div className="absolute inset-0 flex items-start sm:items-center justify-center z-10 pt-[18vh] sm:pt-0 pb-8 sm:pb-0 overflow-y-auto sm:overflow-hidden pointer-events-auto sm:pointer-events-none">
-        <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-[clamp(0.5rem,7vw,8rem)]">
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <div className="flex items-center gap-[clamp(0.5rem,7vw,8rem)]">
 
           {/* ====== Input Column ====== */}
-          <div className="flex flex-col items-center sm:items-end gap-2 sm:gap-3 relative">
+          <div className="flex flex-col items-end gap-3 relative">
             <motion.div
-              className="hidden sm:block absolute -top-12 right-0 text-[var(--color-text-primary)] text-xs sm:text-sm md:text-base font-semibold tracking-widest whitespace-nowrap opacity-60 uppercase"
+              className="absolute -top-10 sm:-top-12 right-0 text-[var(--color-text-primary)] text-xs sm:text-sm md:text-base font-semibold tracking-widest whitespace-nowrap opacity-60 uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: step >= 2 ? 0.8 : 0 }}
             >
               {step >= 4 ? "多模态输入 / MULTIMODAL" : "输入 / INPUT"}
             </motion.div>
-            <div className="flex flex-row sm:flex-col flex-wrap justify-center gap-2 sm:gap-3">
-              {inputItems.map((item, i) => (
-                <motion.div
-                  key={item.label + "-in"}
-                  ref={(el) => { inputRefs.current[i] = el; }}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{
-                    opacity: step >= item.step ? 1 : 0,
-                    x: step >= item.step ? 0 : 20,
-                  }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                >
-                  <div className="data-chip flex items-center gap-1.5 text-[clamp(0.65rem,1.1vw,1rem)] !px-2 !py-1 sm:!px-4 sm:!py-2.5">
-                    <span className="opacity-80" style={{ color: item.color }}>{MEDIA_ICONS[item.label]}</span>
-                    {item.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {inputItems.map((item, i) => (
+              <motion.div
+                key={item.label + "-in"}
+                ref={(el) => { inputRefs.current[i] = el; }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{
+                  opacity: step >= item.step ? 1 : 0,
+                  x: step >= item.step ? 0 : 20,
+                }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <div className="data-chip flex items-center gap-1.5 text-[clamp(0.65rem,1.1vw,1rem)] !px-2 !py-1 sm:!px-4 sm:!py-2.5">
+                  <span className="opacity-80" style={{ color: item.color }}>{MEDIA_ICONS[item.label]}</span>
+                  {item.label}
+                </div>
+              </motion.div>
+            ))}
           </div>
 
           {/* ====== Token: Input → Model ====== */}
           <AnimatePresence>
             {step >= 9 && (
               <motion.div
-                className="hidden sm:flex flex-col items-center gap-1"
+                className="flex flex-col items-center gap-1"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.5 }}
@@ -241,7 +239,7 @@ export default function SlideWhatIsAI() {
             }}
           >
             <motion.div
-              className="absolute -top-[clamp(48px,10vh,100px)] text-[var(--color-primary)] text-xs sm:text-sm md:text-base font-bold tracking-widest whitespace-nowrap uppercase"
+              className="absolute -top-[100px] text-[var(--color-primary)] text-sm md:text-base font-bold tracking-widest whitespace-nowrap uppercase"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: showBox ? 0.9 : 0, y: showBox ? 0 : 10 }}
               transition={{ delay: 0.6 }}
@@ -251,7 +249,7 @@ export default function SlideWhatIsAI() {
 
             {/* Ambient glow */}
             <motion.div
-              className="absolute rounded-full monolith-orb-primary w-[clamp(180px,45vw,500px)] h-[clamp(180px,45vw,500px)]"
+              className="absolute rounded-full monolith-orb-primary w-[500px] h-[500px]"
               animate={{
                 opacity: showBox && step < 8 ? [0.2, 0.5, 0.2] : (step >= 8 ? [0.05, 0.15, 0.05] : 0),
                 scale: showBox ? [0.9, 1.1, 0.9] : 0.5,
@@ -264,7 +262,7 @@ export default function SlideWhatIsAI() {
                 <motion.svg
                   key="magic-box"
                   viewBox="0 0 200 220"
-                  className="w-[clamp(100px,28vw,420px)] h-auto relative z-10"
+                  className="w-[clamp(250px,30vw,420px)] h-auto relative z-10"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1, y: [-5, 5, -5] }}
                   exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
@@ -325,7 +323,7 @@ export default function SlideWhatIsAI() {
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
                 >
-                  <div className="backdrop-blur-md rounded-2xl px-4 sm:px-10 py-4 sm:py-8">
+                  <div className="backdrop-blur-md rounded-2xl px-10 py-8">
                     <div className="text-[clamp(1.5rem,3vw,3rem)] text-white font-tech tracking-wider drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">
                       <BlockMath math="Y \sim f(X; \theta)" />
                     </div>
@@ -333,7 +331,7 @@ export default function SlideWhatIsAI() {
 
                   {/* Legend below formula */}
                   <motion.div
-                    className="relative sm:absolute sm:-bottom-20 mt-3 sm:mt-0 font-body tracking-widest flex flex-wrap items-center justify-center gap-1.5 max-w-[80vw]"
+                    className="absolute -bottom-20 w-max font-body tracking-widest flex items-center gap-4"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.8 }}
@@ -344,7 +342,7 @@ export default function SlideWhatIsAI() {
                       { math: "f", desc: "神经网络" },
                       { math: "Y", desc: "高维生成输出" }
                     ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-2 py-1 rounded-lg backdrop-blur-sm text-xs sm:text-sm text-[var(--color-primary-container)]">
+                      <div key={i} className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg backdrop-blur-sm text-sm text-[var(--color-primary-container)]">
                         <span className="text-white scale-110 drop-shadow"><InlineMath math={item.math} /></span>
                         <span className="opacity-80 text-xs tracking-wider">：{item.desc}</span>
                       </div>
@@ -359,7 +357,7 @@ export default function SlideWhatIsAI() {
           <AnimatePresence>
             {step >= 9 && (
               <motion.div
-                className="hidden sm:flex flex-col items-center gap-1"
+                className="flex flex-col items-center gap-1"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.5 }}
@@ -382,43 +380,41 @@ export default function SlideWhatIsAI() {
           </AnimatePresence>
 
           {/* ====== Output Column ====== */}
-          <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-3 relative">
+          <div className="flex flex-col items-start gap-3 relative">
             <motion.div
-              className="hidden sm:block absolute -top-12 left-0 text-[var(--color-text-primary)] text-xs sm:text-sm md:text-base font-semibold tracking-widest whitespace-nowrap opacity-60 uppercase"
+              className="absolute -top-12 left-0 text-[var(--color-text-primary)] text-sm md:text-base font-semibold tracking-widest whitespace-nowrap uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: step >= 3 ? 0.8 : 0 }}
             >
               {step >= 7 ? "多模态输出 / MULTIMODAL" : "生成 / OUTPUT"}
             </motion.div>
-            <div className="flex flex-row sm:flex-col flex-wrap justify-center gap-2 sm:gap-3">
-              {outputItems.map((item, i) => (
-                <motion.div
-                  key={item.label + "-out"}
-                  ref={(el) => { outputRefs.current[i] = el; }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{
-                    opacity: step >= item.step ? 1 : 0,
-                    x: step >= item.step ? 0 : -20,
-                  }}
-                  transition={{
-                    duration: 0.4,
-                    ease: "easeOut",
-                    delay: item.step === 7 ? i * 0.12 : 0,
-                  }}
-                >
-                  <div className="data-chip flex items-center gap-1.5 text-[clamp(0.65rem,1.1vw,1rem)] !px-2 !py-1 sm:!px-4 sm:!py-2.5">
-                    <span className="opacity-80" style={{ color: item.color }}>{MEDIA_ICONS[item.label]}</span>
-                    {item.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {outputItems.map((item, i) => (
+              <motion.div
+                key={item.label + "-out"}
+                ref={(el) => { outputRefs.current[i] = el; }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{
+                  opacity: step >= item.step ? 1 : 0,
+                  x: step >= item.step ? 0 : -20,
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: "easeOut",
+                  delay: item.step === 7 ? i * 0.12 : 0,
+                }}
+              >
+                <div className="data-chip flex items-center gap-2 text-[clamp(0.75rem,1.1vw,1rem)] !px-4 !py-2.5">
+                  <span className="opacity-80" style={{ color: item.color }}>{MEDIA_ICONS[item.label]}</span>
+                  {item.label}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
 
       {/* ====== Dynamic Arrows Overlay ====== */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 hidden sm:block">
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
         <defs>
           <marker id="arrowIn" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" fill="#00f0ff" opacity="0.7" />

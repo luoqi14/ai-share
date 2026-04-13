@@ -128,10 +128,10 @@ export default function SlidePrompt() {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-surface-container-high/50 p-6 rounded-2xl border ghost-border ambient-glow glass-overlay"
               >
-                <h3 className="font-display text-lg sm:text-2xl mb-2 sm:mb-3 text-gradient-primary">
+                <h3 className="font-display text-2xl mb-3 text-gradient-primary">
                   潜在空间的精确导航仪
                 </h3>
-                <p className="text-white/70 text-sm sm:text-lg leading-relaxed">
+                <p className="text-white/70 text-lg leading-relaxed">
                   Prompt 不是在跟 AI 聊天，而是为其输出提供<strong>「边界与约束」</strong>。<br />
                   用密集的约束条件，强行把模型输出的概率云，锁定到极高质量的“甜点区”。
                 </p>
@@ -143,12 +143,16 @@ export default function SlidePrompt() {
                   💡 门诊隐喻
                 </div>
                 <p className="text-white/70 text-[13px] leading-relaxed">
-                  这就像你叮嘱新来的咨询师：&quot;等下面对这位重度牙周炎患者时，你要<strong className="text-white/90">面带微笑，语气温柔</strong>，先共情他的痛苦，再介绍我们的治疗方案。&quot;<span className="text-amber-400/70 ml-1 text-[11px]">（这是规定态度和套路）</span>
+                  这就像你叮嘱新来的咨询师："等下面对这位重度牙周炎患者时，你要<strong className="text-white/90">面带微笑，语气温柔</strong>，先共情他的痛苦，再介绍我们的治疗方案。"<span className="text-amber-400/70 ml-1 text-[11px]">（这是规定态度和套路）</span>
                 </p>
               </div>
 
               {/* Base Prompt */}
               <div className="flex flex-col gap-3">
+                <div className="section-label flex justify-between w-full">
+                  <span>初始请求</span>
+                  <span className="text-[10px] text-primary/50 normal-case opacity-0 group-hover:opacity-100 transition-opacity">点击查看对比</span>
+                </div>
                 <div
                   onClick={() => setIsModalOpen(true)}
                   className="p-4 rounded-xl bg-white/5 border border-white/10 text-white/80 font-medium cursor-pointer hover:bg-white/10 hover:border-primary/50 transition-all active:scale-95 flex justify-between items-center group relative overflow-hidden"
@@ -281,8 +285,7 @@ export default function SlidePrompt() {
                 )}
               </AnimatePresence>
 
-              </div>{/* end scale wrapper */}
-            </div>{/* end right column */}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -291,7 +294,7 @@ export default function SlidePrompt() {
       <AnimatePresence>
         {showMetaphor && (
           <motion.div
-            className="absolute inset-0 px-4 sm:px-12 md:px-24 py-6 sm:py-14 md:py-20 flex flex-col items-center justify-start sm:justify-center gap-4 sm:gap-6 md:gap-10 z-10 overflow-y-auto"
+            className="absolute inset-0 px-24 py-20 flex flex-col items-center justify-center gap-10 z-10"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
@@ -303,10 +306,10 @@ export default function SlidePrompt() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center w-full"
             >
-              <h2 className="font-display text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-6">
+              <h2 className="font-display text-3xl font-bold text-white mb-6">
                 认知颠覆：提示词工程会消失吗？
               </h2>
-              <div className="text-sm sm:text-lg text-white/70 leading-relaxed max-w-4xl mx-auto space-y-3 sm:space-y-4">
+              <div className="text-lg text-white/70 leading-relaxed max-w-4xl mx-auto space-y-4">
                 <p>随着未来的 AI 越来越聪明，你确实不需要再死记硬背各种复杂的提示词模板或者符号了，AI 能听懂你的大白话。</p>
                 
                 <AnimatePresence>
@@ -316,15 +319,15 @@ export default function SlidePrompt() {
                       initial={{ opacity: 0, height: 0, marginTop: 0, marginBottom: 0 }}
                       animate={{ opacity: 1, height: "auto", marginTop: "1.5rem", marginBottom: "1.5rem" }}
                     >
-                      <p className="text-primary font-bold text-base sm:text-xl">“但是，提示词的本质永远不会消失，它会演变成你的<span className="text-secondary mx-1 text-xl sm:text-2xl font-display">「专业认知壁垒」</span>。”</p>
+                      <p className="text-primary font-bold text-xl">“但是，提示词的本质永远不会消失，它会演变成你的<span className="text-secondary mx-1 text-2xl font-display">「专业认知壁垒」</span>。”</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
                 <AnimatePresence>
                   {step >= 8 && (
-                    <motion.p
-                      className="opacity-90 pt-2 font-display text-base sm:text-xl tracking-wide"
+                    <motion.p 
+                      className="opacity-90 pt-2 font-display text-xl tracking-wide"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     >
@@ -339,15 +342,15 @@ export default function SlidePrompt() {
             <AnimatePresence>
               {step >= 8 && (
                 <motion.div
-                  className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full max-w-5xl"
+                  className="flex gap-8 w-full max-w-5xl"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <div className="flex-1 p-4 sm:p-8 rounded-2xl border ghost-border bg-black/40 glass-overlay flex flex-col gap-3 sm:gap-6 relative overflow-hidden transition-all">
+                  <div className="flex-1 p-8 rounded-2xl border ghost-border bg-black/40 glass-overlay flex flex-col gap-6 relative overflow-hidden transition-all">
                     <div className="absolute top-0 left-0 w-full h-1 bg-white/20"></div>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xl">🧍</div>
-                      <span className="font-bold text-base sm:text-lg text-white/80">外行患者</span>
+                      <span className="font-bold text-lg text-white/80">外行患者</span>
                     </div>
                     <div className="p-4 bg-white/5 rounded-xl border border-white/10 text-white/90 shadow-[inset_0_2px_10px_rgba(0,0,0,0.2)]">
                       “牙痛怎么办？”
@@ -358,11 +361,11 @@ export default function SlidePrompt() {
                     </div>
                   </div>
 
-                  <div className="flex-1 p-4 sm:p-8 rounded-2xl border border-primary/30 bg-primary/5 glass-overlay flex flex-col gap-3 sm:gap-6 relative overflow-hidden ambient-glow sm:scale-105 z-10 shadow-2xl transition-all">
+                  <div className="flex-1 p-8 rounded-2xl border border-primary/30 bg-primary/5 glass-overlay flex flex-col gap-6 relative overflow-hidden ambient-glow transform scale-105 z-10 shadow-2xl transition-all">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-primary"></div>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(0,240,255,0.3)]">👨‍⚕️</div>
-                      <span className="font-bold text-base sm:text-lg text-primary">资深门诊运营</span>
+                      <span className="font-bold text-lg text-primary">资深门诊运营</span>
                     </div>
                     <div className="p-4 bg-black/40 rounded-xl border border-primary/30 text-white/90 leading-relaxed text-sm shadow-[inset_0_2px_15px_rgba(0,0,0,0.5)]">
                       “根据门诊本月 300 个初诊留资数据，帮我拆解种植牙和隐形正畸的转化率漏斗，并针对流失率最高的面诊环节设计一套客服逼单话术。”
@@ -382,10 +385,10 @@ export default function SlidePrompt() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-2 sm:mt-6 p-4 sm:p-6 sm:px-10 w-full max-w-5xl rounded-2xl bg-surface-container-highest border border-white/10 text-center glass-overlay ambient-glow"
+                  className="mt-6 p-6 px-10 w-full max-w-5xl rounded-2xl bg-surface-container-highest border border-white/10 text-center glass-overlay ambient-glow"
                 >
-                  <p className="text-sm sm:text-xl leading-relaxed text-white/90 font-display">
-                    AI 的输出上限，永远被你提出问题的<strong className="text-secondary text-lg sm:text-[26px] mx-2 tracking-widest border-b-2 border-secondary/50 pb-1">专业深度</strong>死死锁住。<br />
+                  <p className="text-xl leading-relaxed text-white/90 font-display">
+                    AI 的输出上限，永远被你提出问题的<strong className="text-secondary text-[26px] mx-2 tracking-widest border-b-2 border-secondary/50 pb-1">专业深度</strong>死死锁住。<br />
                     <span className="mt-3 block text-[0.95em] text-white/70">
                       你越懂业务，AI 在你手里越像<span className="text-primary mx-1">核武</span>；你自己都不懂，AI 只能给你输出正确<span className="opacity-50">的废话。</span>
                     </span>
@@ -485,12 +488,12 @@ export default function SlidePrompt() {
               </div>
 
               {/* Modal Body */}
-              <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
+              <div className="flex-1 flex overflow-hidden">
                 {/* Left Pane */}
                 <div
                   ref={scrollRef1}
                   onScroll={handleScroll1}
-                  className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 sm:py-8 border-b sm:border-b-0 sm:border-r border-white/5 custom-markdown-scrollbar"
+                  className="flex-1 overflow-y-auto p-12 py-8 border-r border-white/5 custom-markdown-scrollbar"
                 >
                   <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/60 font-mono tracking-widest uppercase">
                     Model Output A (无约束)
@@ -506,7 +509,7 @@ export default function SlidePrompt() {
                 <div
                   ref={scrollRef2}
                   onScroll={handleScroll2}
-                  className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 sm:py-8 custom-markdown-scrollbar bg-black/10"
+                  className="flex-1 overflow-y-auto p-12 py-8 custom-markdown-scrollbar bg-black/10"
                 >
                   <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-mono tracking-widest uppercase shadow-[0_0_15px_rgba(0,240,255,0.1)]">
                     Model Output B (甜点区)

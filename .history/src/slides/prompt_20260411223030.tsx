@@ -143,12 +143,16 @@ export default function SlidePrompt() {
                   💡 门诊隐喻
                 </div>
                 <p className="text-white/70 text-[13px] leading-relaxed">
-                  这就像你叮嘱新来的咨询师：&quot;等下面对这位重度牙周炎患者时，你要<strong className="text-white/90">面带微笑，语气温柔</strong>，先共情他的痛苦，再介绍我们的治疗方案。&quot;<span className="text-amber-400/70 ml-1 text-[11px]">（这是规定态度和套路）</span>
+                  这就像你叮嘱新来的咨询师："等下面对这位重度牙周炎患者时，你要<strong className="text-white/90">面带微笑，语气温柔</strong>，先共情他的痛苦，再介绍我们的治疗方案。"<span className="text-amber-400/70 ml-1 text-[11px]">（这是规定态度和套路）</span>
                 </p>
               </div>
 
               {/* Base Prompt */}
               <div className="flex flex-col gap-3">
+                <div className="section-label flex justify-between w-full">
+                  <span>初始请求</span>
+                  <span className="text-[10px] text-primary/50 normal-case opacity-0 group-hover:opacity-100 transition-opacity">点击查看对比</span>
+                </div>
                 <div
                   onClick={() => setIsModalOpen(true)}
                   className="p-4 rounded-xl bg-white/5 border border-white/10 text-white/80 font-medium cursor-pointer hover:bg-white/10 hover:border-primary/50 transition-all active:scale-95 flex justify-between items-center group relative overflow-hidden"
@@ -382,10 +386,10 @@ export default function SlidePrompt() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-2 sm:mt-6 p-4 sm:p-6 sm:px-10 w-full max-w-5xl rounded-2xl bg-surface-container-highest border border-white/10 text-center glass-overlay ambient-glow"
+                  className="mt-6 p-6 px-10 w-full max-w-5xl rounded-2xl bg-surface-container-highest border border-white/10 text-center glass-overlay ambient-glow"
                 >
-                  <p className="text-sm sm:text-xl leading-relaxed text-white/90 font-display">
-                    AI 的输出上限，永远被你提出问题的<strong className="text-secondary text-lg sm:text-[26px] mx-2 tracking-widest border-b-2 border-secondary/50 pb-1">专业深度</strong>死死锁住。<br />
+                  <p className="text-xl leading-relaxed text-white/90 font-display">
+                    AI 的输出上限，永远被你提出问题的<strong className="text-secondary text-[26px] mx-2 tracking-widest border-b-2 border-secondary/50 pb-1">专业深度</strong>死死锁住。<br />
                     <span className="mt-3 block text-[0.95em] text-white/70">
                       你越懂业务，AI 在你手里越像<span className="text-primary mx-1">核武</span>；你自己都不懂，AI 只能给你输出正确<span className="opacity-50">的废话。</span>
                     </span>
@@ -485,12 +489,12 @@ export default function SlidePrompt() {
               </div>
 
               {/* Modal Body */}
-              <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
+              <div className="flex-1 flex overflow-hidden">
                 {/* Left Pane */}
                 <div
                   ref={scrollRef1}
                   onScroll={handleScroll1}
-                  className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 sm:py-8 border-b sm:border-b-0 sm:border-r border-white/5 custom-markdown-scrollbar"
+                  className="flex-1 overflow-y-auto p-12 py-8 border-r border-white/5 custom-markdown-scrollbar"
                 >
                   <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/60 font-mono tracking-widest uppercase">
                     Model Output A (无约束)
@@ -506,7 +510,7 @@ export default function SlidePrompt() {
                 <div
                   ref={scrollRef2}
                   onScroll={handleScroll2}
-                  className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 sm:py-8 custom-markdown-scrollbar bg-black/10"
+                  className="flex-1 overflow-y-auto p-12 py-8 custom-markdown-scrollbar bg-black/10"
                 >
                   <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-mono tracking-widest uppercase shadow-[0_0_15px_rgba(0,240,255,0.1)]">
                     Model Output B (甜点区)

@@ -63,13 +63,6 @@ export default function SlideBenchmark() {
   const isChartCentered = step === 1;
 
   const [leaderboard, setLeaderboard] = useState<any[]>([]);
-  const [isSmall, setIsSmall] = useState(false);
-  useEffect(() => {
-    const check = () => setIsSmall(window.innerWidth < 640);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
 
   useEffect(() => {
     if (step >= 1 && leaderboard.length === 0) {
@@ -88,7 +81,7 @@ export default function SlideBenchmark() {
       <AnimatePresence>
         {showBox && (
           <motion.div
-            className="absolute inset-0 top-[15vh] px-4 sm:px-8 md:px-16 pb-4 sm:pb-16 flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-center gap-4 sm:gap-12 overflow-y-auto"
+            className="absolute inset-0 top-[15vh] px-16 pb-16 flex flex-row items-center justify-center gap-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -98,21 +91,21 @@ export default function SlideBenchmark() {
             {showChart && (
               <motion.div
                 layout
-                className="relative flex flex-col items-center justify-center bg-surface-container-high/40 rounded-3xl border ghost-border glass-overlay h-[45vh] sm:h-full overflow-hidden shrink-0"
+                className="relative flex flex-col items-center justify-center bg-surface-container-high/40 rounded-3xl border ghost-border glass-overlay h-full overflow-hidden"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{
                   opacity: 1,
                   scale: 1,
-                  width: isSmall ? "100%" : (isChartCentered ? "80%" : "45%")
+                  width: isChartCentered ? "80%" : "45%"
                 }}
                 transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
               >
 
                 {/* Chart Header */}
-                <div className="w-full flex justify-between items-start p-4 sm:p-8 pb-2 sm:pb-4 border-b border-white/5 bg-white/[0.02]">
-                  <div className="flex flex-col gap-2 sm:gap-3 flex-1">
+                <div className="w-full flex justify-between items-start p-8 pb-4 border-b border-white/5 bg-white/[0.02]">
+                  <div className="flex flex-col gap-3 flex-1">
                     <div className="flex items-center gap-3">
-                      <span className="font-display font-medium text-lg sm:text-2xl text-white/90">文本模型竞技场</span>
+                      <span className="font-display font-medium text-2xl text-white/90">文本模型竞技场</span>
                     </div>
                     <div className="text-white/60 text-sm mt-1">
                       查看跨越数学、编程、创意写作等各个开放领域任务的 AI 文本模型综合排名。
@@ -156,13 +149,13 @@ export default function SlideBenchmark() {
             <AnimatePresence>
               {step >= 2 && (
                 <motion.div
-                  className="w-full sm:flex-1 sm:h-full flex flex-col pt-2 sm:pt-4 overflow-hidden"
+                  className="flex-1 h-full flex flex-col pt-4 overflow-hidden"
                   initial={{ opacity: 0, x: 40 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <div className="mb-3 sm:mb-6 px-2 sm:px-4">
-                    <h2 className="font-display text-lg sm:text-2xl font-medium text-white mb-2">为什么发布会上数据都那么好？</h2>
+                  <div className="mb-6 px-4">
+                    <h2 className="font-display text-2xl font-medium text-white mb-2">为什么发布会上数据都那么好？</h2>
                   </div>
 
                   <div className="flex flex-col gap-5 overflow-y-auto pr-4 pb-20 custom-markdown-scrollbar">
@@ -175,7 +168,7 @@ export default function SlideBenchmark() {
                           key={index}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="bg-black/20 border border-white/5 rounded-2xl p-4 sm:p-6 flex flex-col gap-3"
+                          className="bg-black/20 border border-white/5 rounded-2xl p-6 flex flex-col gap-3"
                         >
                           <div className="flex items-center gap-4">
                             <span className="font-tech text-white/30 text-xl border border-white/10 px-3 py-1 rounded-sm">

@@ -47,7 +47,7 @@ export default function SlideTitle({ title, label, subtitle, moved }: SlideTitle
 
       {/* Main heading */}
       <motion.h1
-        className="font-display font-extrabold leading-none tracking-[-0.03em] !m-0 whitespace-nowrap"
+        className="font-display font-extrabold leading-none tracking-[-0.03em] !m-0 whitespace-nowrap text-center"
         animate={{
           fontSize: moved ? "clamp(1.5rem, 3vw, 2.5rem)" : "clamp(3.5rem, 9vw, 8rem)",
         }}
@@ -63,7 +63,6 @@ export default function SlideTitle({ title, label, subtitle, moved }: SlideTitle
           textShadow: moved
             ? "none"
             : "0 0 40px rgba(0, 240, 255, 0.3), 0 0 80px rgba(0, 240, 255, 0.15)",
-            textAlign: moved ? 'left' : 'center'
         }}
       >
         {title}

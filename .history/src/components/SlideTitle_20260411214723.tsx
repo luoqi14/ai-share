@@ -63,7 +63,6 @@ export default function SlideTitle({ title, label, subtitle, moved }: SlideTitle
           textShadow: moved
             ? "none"
             : "0 0 40px rgba(0, 240, 255, 0.3), 0 0 80px rgba(0, 240, 255, 0.15)",
-            textAlign: moved ? 'left' : 'center'
         }}
       >
         {title}

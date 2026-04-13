@@ -143,12 +143,16 @@ export default function SlidePrompt() {
                   💡 门诊隐喻
                 </div>
                 <p className="text-white/70 text-[13px] leading-relaxed">
-                  这就像你叮嘱新来的咨询师：&quot;等下面对这位重度牙周炎患者时，你要<strong className="text-white/90">面带微笑，语气温柔</strong>，先共情他的痛苦，再介绍我们的治疗方案。&quot;<span className="text-amber-400/70 ml-1 text-[11px]">（这是规定态度和套路）</span>
+                  这就像你叮嘱新来的咨询师："等下面对这位重度牙周炎患者时，你要<strong className="text-white/90">面带微笑，语气温柔</strong>，先共情他的痛苦，再介绍我们的治疗方案。"<span className="text-amber-400/70 ml-1 text-[11px]">（这是规定态度和套路）</span>
                 </p>
               </div>
 
               {/* Base Prompt */}
               <div className="flex flex-col gap-3">
+                <div className="section-label flex justify-between w-full">
+                  <span>初始请求</span>
+                  <span className="text-[10px] text-primary/50 normal-case opacity-0 group-hover:opacity-100 transition-opacity">点击查看对比</span>
+                </div>
                 <div
                   onClick={() => setIsModalOpen(true)}
                   className="p-4 rounded-xl bg-white/5 border border-white/10 text-white/80 font-medium cursor-pointer hover:bg-white/10 hover:border-primary/50 transition-all active:scale-95 flex justify-between items-center group relative overflow-hidden"

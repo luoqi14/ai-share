@@ -66,7 +66,7 @@ export default function SlideVector() {
               {showMatrixScene && (
                 <motion.div
                   key="matrix-scene"
-                  className="absolute inset-0 flex items-center justify-start sm:justify-center overflow-y-auto pt-4 sm:pt-10"
+                  className="absolute inset-0 flex items-center justify-center pt-10"
                   initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
@@ -121,7 +121,7 @@ export default function SlideVector() {
                           ))}
                         </div>
                       </div>
-                      <div className="mt-3 sm:mt-8 border border-[var(--color-primary)] rounded-full px-3 sm:px-4 md:px-6 py-1 sm:py-2 text-[var(--color-primary)] font-mono text-xs sm:text-sm md:text-lg tracking-widest">
+                      <div className="mt-8 border border-[var(--color-primary)] rounded-full px-4 md:px-6 py-2 text-[var(--color-primary)] font-mono text-sm md:text-lg tracking-widest">
                         200000 X 8192
                       </div>
                     </div>
