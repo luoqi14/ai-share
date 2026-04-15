@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { endSubtitles } from "@/data/end_data";
+import { useSlideAudioContext } from "@/config/SlideAudioContext";
 
 const getColorClass = (index: number) => {
   // 14 premium colors with expanded palette
@@ -182,78 +183,35 @@ const SubtitleRenderer = ({ sub, index }: { sub: any, index: number }) => {
 };
 
 export default function SlideEnd() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number>(-1);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  // Consume the audio API injected by SlideContainer via context.
+  // progress (currentTime) drives subtitle tracking; all playback controls
+  // (play/pause/scrub/auto-advance) are handled by the global SlideAudioBar.
+  const audio = useSlideAudioContext();
+
+  // Own RAF — polls audioRef.currentTime directly so we don't depend on the
+  // (now removed) progress state in useSlideAudio.
   const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(1);
-  const reqRef = useRef<number>(0);
-
-  const formatTime = (time: number) => {
-    if (isNaN(time)) return "0:00";
-    const m = Math.floor(time / 60);
-    const s = Math.floor(time % 60);
-    return `${m}:${s.toString().padStart(2, '0')}`;
-  };
-
-  const formatTimeMs = (time: number) => {
-    if (isNaN(time)) return "0:00.000";
-    const m = Math.floor(time / 60);
-    const s = Math.floor(time % 60);
-    const ms = Math.floor((time % 1) * 1000);
-    return `${m}:${s.toString().padStart(2, '0')}.${ms.toString().padStart(3, '0')}`;
-  };
-
+  const rafRef = useRef<number>(0);
   useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio("/end.mp3");
+    const tick = () => {
+      const t = audio?.audioRef.current?.currentTime ?? 0;
+      setProgress(t);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    if (audio?.hasAudio) {
+      rafRef.current = requestAnimationFrame(tick);
     }
-    const audio = audioRef.current;
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [audio?.hasAudio, audio?.audioRef]);
 
-    const handleLoadedMetadata = () => {
-      if (audio.duration && !isNaN(audio.duration)) {
-        setDuration(audio.duration);
-      }
-    };
-    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-    if (audio.readyState >= 1) handleLoadedMetadata();
-
-    // Do NOT play automatically on mount!
-    // The user must click the play button to satisfy "进入该幻灯片就不需要自动播放了".
-
-    const updateTime = () => {
-      // Return early if not playing or completed to avoid unnecessary calculations
-      if (audio.paused && audio.currentTime === 0) {
-        reqRef.current = requestAnimationFrame(updateTime);
-        return;
-      }
-
-      const now = audio.currentTime;
-      setProgress(now);
-      
-      let newIdx = -1;
-
-      for (let i = 0; i < endSubtitles.length; i++) {
-        if (now >= endSubtitles[i].start && now < endSubtitles[i].end) {
-          newIdx = i;
-          break;
-        }
-      }
-      
-      setActiveIndex(newIdx);
-      reqRef.current = requestAnimationFrame(updateTime);
-    };
-    
-    reqRef.current = requestAnimationFrame(updateTime);
-
-    return () => {
-      cancelAnimationFrame(reqRef.current);
-      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      audio.pause();
-      audio.currentTime = 0; // Restoring initial state implicitly handled by Next.js unmounting this component
-    };
-  }, []);
+  // Derive active subtitle from current playback position
+  let activeIndex = -1;
+  for (let i = 0; i < endSubtitles.length; i++) {
+    if (progress >= endSubtitles[i].start && progress < endSubtitles[i].end) {
+      activeIndex = i;
+      break;
+    }
+  }
 
   const activeSub = activeIndex !== -1 ? endSubtitles[activeIndex] : null;
   const logicIndex = activeIndex + 1; // 1-based index to maintain visual mappings
@@ -280,107 +238,6 @@ export default function SlideEnd() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {!isPlaying && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-pointer pointer-events-auto"
-            onClick={() => {
-              audioRef.current?.play();
-              setIsPlaying(true);
-              setIsPaused(false);
-            }}
-          >
-            <div className="text-white text-2xl font-display tracking-widest border border-white/20 px-8 py-4 rounded-full hover:bg-white/10 transition-colors">
-              播放结束语
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Invisible layer to capture click-to-pause (behind progress bar) */}
-      {isPlaying && (
-        <div 
-          className="absolute inset-0 z-20 cursor-pointer pointer-events-auto"
-          onClick={() => {
-            if (audioRef.current) {
-              if (audioRef.current.paused) {
-                audioRef.current.play();
-                setIsPaused(false);
-              } else {
-                audioRef.current.pause();
-                setIsPaused(true);
-              }
-            }
-          }}
-        />
-      )}
-
-      {/* Paused visual indicator */}
-      <AnimatePresence>
-        {isPaused && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none"
-          >
-            <div className="text-white/20 text-4xl tracking-[0.5em] font-display uppercase blur-[1px]">
-              Paused
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Progress Bar (Visible when playing) */}
-      <AnimatePresence>
-        {isPlaying && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="absolute bottom-8 left-10 right-10 z-50 flex items-center justify-center gap-4 text-white/40 font-mono text-sm pointer-events-auto group"
-            style={{ zIndex: 50 }}
-          >
-            <span className="w-24 text-right">{formatTimeMs(progress)}</span>
-            <input
-              type="range"
-              min={0}
-              max={duration}
-              step={0.01}
-              value={progress}
-              onChange={(e) => {
-                const newTime = parseFloat(e.target.value);
-                if (audioRef.current) {
-                  audioRef.current.currentTime = newTime;
-                  setProgress(newTime);
-                }
-              }}
-              className="flex-1 max-w-4xl h-1 bg-white/20 rounded-full appearance-none outline-none cursor-pointer hover:h-2 transition-all opacity-50 group-hover:opacity-100"
-              style={{
-                background: `linear-gradient(to right, var(--color-primary) ${(progress / duration) * 100}%, rgba(255,255,255,0.1) ${(progress / duration) * 100}%)`,
-              }}
-            />
-            <span className="w-12 text-left">{formatTime(duration)}</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <style>{`
-        input[type=range]::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 0px; 
-          height: 0px; 
-        }
-        input[type=range]:hover::-webkit-slider-thumb {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background: white;
-          box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
-          transition: 0.1s;
-        }
-      `}</style>
     </div>
   );
 }

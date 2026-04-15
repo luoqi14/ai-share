@@ -109,7 +109,6 @@ export function useSlideNavigation(): SlideNavigation {
       switch (e.key) {
         case "ArrowRight":
         case "ArrowDown":
-        case " ":
         case "PageDown":
           e.preventDefault();
           next();

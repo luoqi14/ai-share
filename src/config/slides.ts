@@ -53,7 +53,7 @@ export const slides: SlideEntry[] = [
     title: "AI大模型",
     component: SlideWhatIsAI,
     section: "基础概念",
-    steps: 9,
+    steps: 6,
   },
   {
     id: "token",
@@ -88,21 +88,21 @@ export const slides: SlideEntry[] = [
     title: "概率与生成",
     component: SlideLogits,
     section: "生成原理",
-    steps: 7,
+    steps: 10,
   },
   {
     id: "prompt",
     title: "提示词工程",
     component: SlidePrompt,
     section: "应用实践",
-    steps: 9,
+    steps: 10,
   },
   {
     id: "context",
     title: "上下文工程",
     component: SlideContext,
     section: "应用实践",
-    steps: 10,
+    steps: 17,
   },
   {
     id: "harness",
@@ -123,7 +123,7 @@ export const slides: SlideEntry[] = [
     title: "主流大模型",
     component: SlideModel,
     section: "应用实践",
-    steps: 1,
+    steps: 11,
   },
   {
     id: "end",

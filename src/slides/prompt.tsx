@@ -3,10 +3,14 @@
 /**
  * Slide — "提示词工程" / PROMPT ENGINEERING
  *
- * Step 0: Title centered
- * Step 1: Title flies to top-left. Introduce core concept: "Navigation, not Chatting"
- * Step 2-5: Progressively add constraints to a baseline prompt, visualizing the 
- *           shrinking of the probability space (latent space) into a sweet spot.
+ * Step 0:   Title centered
+ * Step 1:   Title flies to top-left. Introduce core concept: "Navigation, not Chatting"
+ * Step 2-5: Progressively add constraints, visualizing probability-space shrinking
+ * Step 6:   Modal auto-opens (comparison A vs B), both panels auto-scroll slowly
+ * Step 7:   Modal closes. Metaphor section appears.
+ * Step 8:   Quote "提示词的本质永远不会消失…" appears
+ * Step 9:   "超级实习生" intro + comparison cards appear
+ * Step 10:  Conclusion card appears
  */
 
 import { useState, useEffect, useRef } from "react";
@@ -52,22 +56,27 @@ const CLOUD_STATES = {
 
 export default function SlidePrompt() {
   const step = useCurrentStep();
-  const showBox = step >= 1 && step < 6;
-  const showConcept = step >= 1 && step < 6;
-  const showMetaphor = step >= 6;
+  const showBox = step >= 1 && step < 7;
+  const showConcept = step >= 1 && step < 7;
+  const showMetaphor = step >= 7;
 
   // The visual state of the cloud based on how many constraints added
   const constraintCount = Math.max(0, step - 1);
   const cloudState = CLOUD_STATES[Math.min(step, 5) as keyof typeof CLOUD_STATES] || CLOUD_STATES[1];
 
   // --- Modal & Markdown State ---
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // Manual open: user clicked the base-prompt button (steps 1-5).
+  // Step 6 auto-opens the modal; step 7+ auto-closes regardless of manual state.
+  const [isManuallyOpen, setIsManuallyOpen] = useState(false);
+  const isModalOpen = step === 6 || (step < 6 && isManuallyOpen);
+
   const [md1Content, setMd1Content] = useState("");
   const [md2Content, setMd2Content] = useState("");
   const scrollRef1 = useRef<HTMLDivElement>(null);
   const scrollRef2 = useRef<HTMLDivElement>(null);
   const isSyncingLeft = useRef(false);
   const isSyncingRight = useRef(false);
+  const autoScrollRafRef = useRef(0);
 
   useEffect(() => {
     if (isModalOpen && !md1Content) {
@@ -75,6 +84,40 @@ export default function SlidePrompt() {
       fetch("/prompt2.md").then(res => res.text()).then(setMd2Content);
     }
   }, [isModalOpen, md1Content]);
+
+  // Auto-scroll both panels slowly when step===6 (modal is auto-open)
+  useEffect(() => {
+    if (step !== 6 || !isModalOpen) {
+      cancelAnimationFrame(autoScrollRafRef.current);
+      return;
+    }
+
+    const SPEED = 60; // px per second
+    let lastTime: number | null = null;
+
+    // Small delay so the modal can open and content can start rendering
+    const startTimer = setTimeout(() => {
+      const tick = (ts: number) => {
+        if (lastTime === null) lastTime = ts;
+        const dt = Math.min((ts - lastTime) / 1000, 0.05);
+        lastTime = ts;
+
+        // Scroll both panels directly; suppress cross-sync handlers
+        isSyncingLeft.current = true;
+        isSyncingRight.current = true;
+        if (scrollRef1.current) scrollRef1.current.scrollTop += SPEED * dt;
+        if (scrollRef2.current) scrollRef2.current.scrollTop += SPEED * dt;
+
+        autoScrollRafRef.current = requestAnimationFrame(tick);
+      };
+      autoScrollRafRef.current = requestAnimationFrame(tick);
+    }, 600);
+
+    return () => {
+      clearTimeout(startTimer);
+      cancelAnimationFrame(autoScrollRafRef.current);
+    };
+  }, [step, isModalOpen]);
 
   const handleScroll1 = () => {
     if (isSyncingLeft.current) {
@@ -150,7 +193,7 @@ export default function SlidePrompt() {
               {/* Base Prompt */}
               <div className="flex flex-col gap-3">
                 <div
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => setIsManuallyOpen(true)}
                   className="p-4 rounded-xl bg-white/5 border border-white/10 text-white/80 font-medium cursor-pointer hover:bg-white/10 hover:border-primary/50 transition-all active:scale-95 flex justify-between items-center group relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -310,8 +353,8 @@ export default function SlidePrompt() {
                 <p>随着未来的 AI 越来越聪明，你确实不需要再死记硬背各种复杂的提示词模板或者符号了，AI 能听懂你的大白话。</p>
                 
                 <AnimatePresence>
-                  {step >= 7 && (
-                    <motion.div 
+                  {step >= 8 && (
+                    <motion.div
                       className="py-4 border-y border-white/10 my-6"
                       initial={{ opacity: 0, height: 0, marginTop: 0, marginBottom: 0 }}
                       animate={{ opacity: 1, height: "auto", marginTop: "1.5rem", marginBottom: "1.5rem" }}
@@ -322,13 +365,13 @@ export default function SlidePrompt() {
                 </AnimatePresence>
 
                 <AnimatePresence>
-                  {step >= 8 && (
+                  {step >= 9 && (
                     <motion.p
                       className="opacity-90 pt-2 font-display text-base sm:text-xl tracking-wide"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                     >
-                      想象 AI 是一个智商 180 但毫不懂行业实战的的<strong className="text-white">“超级实习生”</strong>：
+                      想象 AI 是一个智商 180 但毫不懂行业实战的<strong className="text-white">“超级实习生”</strong>：
                     </motion.p>
                   )}
                 </AnimatePresence>
@@ -337,7 +380,7 @@ export default function SlidePrompt() {
 
             {/* Comparison Cards (Step 8) */}
             <AnimatePresence>
-              {step >= 8 && (
+              {step >= 9 && (
                 <motion.div
                   className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full max-w-5xl"
                   initial={{ opacity: 0, y: 30 }}
@@ -378,7 +421,7 @@ export default function SlidePrompt() {
 
             {/* Conclusion (Step 9) */}
             <AnimatePresence>
-              {step >= 9 && (
+              {step >= 10 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -475,7 +518,7 @@ export default function SlidePrompt() {
                   </div>
                 </div>
                 <button
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => setIsManuallyOpen(false)}
                   className="p-2 rounded-full bg-white/5 hover:bg-white/20 text-white/70 hover:text-white transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

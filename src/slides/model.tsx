@@ -208,15 +208,25 @@ const parseHighlight = (text: string) => {
 export default function SlideModel() {
   const step = useCurrentStep();
   const showBox = step >= 1;
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  // Step-driven active index (step 1 → model 0, step 2 → model 1, …)
+  const stepActiveIndex = step >= 1 ? step - 1 : 0;
+  // User can click to override; resets when step changes
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(0);
   const [isSmall, setIsSmall] = useState(false);
+
+  useEffect(() => {
+    setClickedIndex(null);
+  }, [step]);
+
   useEffect(() => {
     const check = () => setIsSmall(window.innerWidth < 640);
     check();
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
+
+  const activeIndex = clickedIndex !== null ? clickedIndex : stepActiveIndex;
 
   return (
     <div className="slide !p-0 overflow-hidden">
@@ -235,9 +245,7 @@ export default function SlideModel() {
             transition={{ duration: 0.6 }}
           >
             {MODELS.map((model, index) => {
-              const isHovered = hoveredIndex === index;
-              // Default to expanding the first item if no item is hovered
-              const isActive = hoveredIndex === null ? index === 0 : isHovered;
+              const isActive = activeIndex === index;
 
               // ── Mobile: compact accordion card ──────────────────────────────
               if (isSmall) {
@@ -309,10 +317,9 @@ export default function SlideModel() {
               return (
                 <motion.div
                   key={model.id}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() => setClickedIndex(isActive ? null : index)}
                   layout
-                  className={`relative group overflow-hidden cursor-pointer rounded-2xl border ghost-border glass-overlay transition-colors bg-surface-container-high/40 ${isHovered ? 'bg-[#151515]/90 border-white/20' : 'hover:bg-black/40'}`}
+                  className={`relative group overflow-hidden cursor-pointer rounded-2xl border ghost-border glass-overlay transition-colors bg-surface-container-high/40 ${isActive ? 'bg-[#151515]/90 border-white/20' : 'hover:bg-black/40'}`}
                   initial={{ flex: 1 }}
                   animate={{
                     flex: isActive ? 14 : 1,
@@ -320,11 +327,11 @@ export default function SlideModel() {
                   transition={{ type: "spring", stiffness: 200, damping: 25 }}
                 >
                   {/* Left accent color edge */}
-                  <div className="absolute inset-y-0 left-0 w-1 flex-shrink-0 opacity-80" style={{ backgroundColor: model.color }}></div>
+                  <div className="absolute inset-y-0 left-0 w-1 shrink-0 opacity-80" style={{ backgroundColor: model.color }}></div>
 
                   {/* Collapsed Vertical Title */}
                   <div
-                    className={`absolute inset-y-0 left-0 w-[50px] flex flex-col items-center justify-center p-2 opacity-60 font-display transition-opacity duration-300 ${isActive ? 'opacity-0 pointer-events-none' : 'group-hover:opacity-100'}`}
+                    className={`absolute inset-y-0 left-0 w-[50px] flex flex-col items-center justify-center p-2 font-display transition-opacity duration-300 ${isActive ? 'opacity-0 pointer-events-none' : 'opacity-70'}`}
                   >
                     <div
                       className="text-white text-lg tracking-widest uppercase font-bold"

@@ -43,9 +43,9 @@ export default function SlideEmbedding() {
     </div>
   );
 
-  // Golden quote tooltip
-  const Tooltip = ({ text }: { text: string }) => (
-    <div className="absolute top-[105%] mt-4 left-1/2 -translate-x-1/2 w-[240px] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-50 translate-y-2 group-hover:translate-y-0">
+  // Golden quote tooltip — shown when `active` (driven by step, not hover)
+  const Tooltip = ({ text, active }: { text: string; active: boolean }) => (
+    <div className={`absolute top-[105%] mt-4 left-1/2 -translate-x-1/2 w-[240px] transition-all duration-300 pointer-events-none z-50 ${active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
       <div className="bg-black/90 border border-[var(--color-primary)]/40 rounded-xl p-3 md:p-4 shadow-[0_10px_30px_rgba(0,190,255,0.2)] backdrop-blur-xl relative">
         {/* Little triangle arrow pointing up */}
         <div className="absolute -top-2 left-1/2 -translate-x-1/2 border-[6px] border-transparent border-b-[var(--color-primary)]/40"></div>
@@ -80,7 +80,7 @@ export default function SlideEmbedding() {
 
               {/* 1. Token ID */}
               <motion.div
-                className="flex flex-col items-center relative z-10 group pointer-events-auto cursor-pointer"
+                className="flex flex-col items-center relative z-10"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: showToken ? 1 : 0, x: showToken ? 0 : -20 }}
                 transition={{ duration: FADE_DURATION }}
@@ -94,7 +94,7 @@ export default function SlideEmbedding() {
                 </div>
                 <TopLabel text="词元化" />
                 <Label text="ID: 9982" />
-                <Tooltip text="把大千世界的连续信息「降维」打碎成离散的乐高块，为了让计算机能存得下。" />
+                <Tooltip text="把大千世界的连续信息「降维」打碎成离散的乐高块，为了让计算机能存得下。" active={step === 1} />
               </motion.div>
 
               {/* Connector 1 */}
@@ -102,7 +102,7 @@ export default function SlideEmbedding() {
 
               {/* 2. Embedding Matrix */}
               <motion.div
-                className="flex flex-col items-center relative z-10 group pointer-events-auto cursor-pointer"
+                className="flex flex-col items-center relative z-10"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: showEmbedding ? 1 : 0, x: showEmbedding ? 0 : -20 }}
                 transition={{ duration: FADE_DURATION, delay: CONNECTOR_DURATION * 0.5 }}
@@ -129,7 +129,7 @@ export default function SlideEmbedding() {
                 </div>
                 <TopLabel text="词嵌入查询" />
                 <Label text="200000 X 8192" />
-                <Tooltip text="把这些冰冷的砖块重新「升维」，抛入一个连续的数学宇宙，赋予它们灵魂和相互的联系。" />
+                <Tooltip text="把这些冰冷的砖块重新「升维」，抛入一个连续的数学宇宙，赋予它们灵魂和相互的联系。" active={step === 2} />
               </motion.div>
 
               {/* Connector 2 */}
@@ -137,7 +137,7 @@ export default function SlideEmbedding() {
 
               {/* 3. Transformer Layers */}
               <motion.div
-                className="flex flex-col items-center relative z-10 group pointer-events-auto cursor-pointer"
+                className="flex flex-col items-center relative z-10"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: showTransformer ? 1 : 0, x: showTransformer ? 0 : -20 }}
                 transition={{ duration: FADE_DURATION, delay: CONNECTOR_DURATION * 0.5 }}
@@ -167,7 +167,7 @@ export default function SlideEmbedding() {
                 <div className="mt-2 ml-4">
                   <Label text="80 LAYERS" />
                 </div>
-                <Tooltip text="大模型的思考，就发生在这个连续的高维流形宇宙中，通过注意力机制捕捉万物的隐式关联。" />
+                <Tooltip text="大模型的思考，就发生在这个连续的高维流形宇宙中，通过注意力机制捕捉万物的隐式关联。" active={step === 3} />
               </motion.div>
 
               {/* Connector 3 */}
@@ -175,7 +175,7 @@ export default function SlideEmbedding() {
 
               {/* 4. LM Head */}
               <motion.div
-                className="flex flex-col items-center relative z-10 group pointer-events-auto cursor-pointer"
+                className="flex flex-col items-center relative z-10"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: showLMHead ? 1 : 0, x: showLMHead ? 0 : -20 }}
                 transition={{ duration: FADE_DURATION, delay: CONNECTOR_DURATION * 0.5 }}
@@ -195,7 +195,7 @@ export default function SlideEmbedding() {
                 </div>
                 <TopLabel text="模型反投影" />
                 <Label text="8192 X 200000" />
-                <Tooltip text="思考完毕，大模型将其高维的「灵感」重新坍缩回人类能理解的世俗字典的维度。" />
+                <Tooltip text="思考完毕，大模型将其高维的「灵感」重新坍缩回人类能理解的世俗字典的维度。" active={step === 4} />
               </motion.div>
 
               {/* Connector 4 */}
@@ -203,7 +203,7 @@ export default function SlideEmbedding() {
 
               {/* 5. Softmax */}
               <motion.div
-                className="flex flex-col items-center relative z-10 group pointer-events-auto cursor-pointer"
+                className="flex flex-col items-center relative z-10"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: showSoftmax ? 1 : 0, x: showSoftmax ? 0 : -20 }}
                 transition={{ duration: FADE_DURATION, delay: CONNECTOR_DURATION * 0.5 }}
@@ -226,7 +226,7 @@ export default function SlideEmbedding() {
                 </div>
                 <TopLabel text="概率分布" />
                 <Label text="TAIL: 199997" />
-                <Tooltip text="在词库的亿万种可能中，结合 Temperature 等超参，笃定地掷出那颗决定命运的概率色子。" />
+                <Tooltip text="在词库的亿万种可能中，结合 Temperature 等超参，笃定地掷出那颗决定命运的概率色子。" active={step === 5} />
               </motion.div>
 
               {/* 6. Autoregressive Loop */}

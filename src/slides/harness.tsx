@@ -108,7 +108,7 @@ export default function SlideHarness() {
                         但在真实的商业环境（如口腔门诊）中，这种不受控的黑盒架构简直是一场灾难。它可能为了查一个排班陷入后台死循环，凭空拉扯几百块的 API 调用费；也可能突然发疯，把来咨询洗牙的排期，自主推理成种牙的手术账单发给患者。
                       </p>
                       <div className="px-5 py-4 border-l-2 border-error/40 bg-error/10 rounded-r-xl">
-                        <strong className="text-error font-medium drop-shadow-md">门诊隐喻：</strong>这就像招了一个智商 180 但极其自负、完全不听指挥的散漫医学天才。你让他去“大厅接待”，他为了炫技越过所有护士，直接把患者拉进手术室要给人家做正颌手术。
+                        <strong className="text-error font-medium drop-shadow-md">门诊隐喻：</strong>这就像招了一个智商 180 但自负、完全不听指挥的散漫医学天才。你让他去“大厅接待”，他为了炫技越过所有护士，直接把患者拉进手术室要给人家做正颌手术。
                       </div>
                     </div>
                   </motion.div>
@@ -158,7 +158,7 @@ export default function SlideHarness() {
                         <h3 className="text-error font-medium mb-3 text-[18px] tracking-wide relative z-10">OpenClaw<span className="text-white/40 text-[13px] ml-2 font-normal">(四肢发达，头脑混乱)</span></h3>
 
                         <p className="mb-4">
-                          <strong className="text-white/80">现状：</strong>OpenClaw 最近极其火爆，GitHub 星星数甚至超越了 Linux。它能把 AI 瞬间接入微信、钉钉、各种数据库，看似手脚全施展开了。
+                          <strong className="text-white/80">现状：</strong>OpenClaw 最近火爆，GitHub 星星数甚至超越了 Linux。它能把 AI 瞬间接入微信、钉钉、各种数据库，看似手脚全施展开了。
                         </p>
                         <p className="mb-4 border-l border-error/50 pl-3 text-[13.5px]">
                           <strong className="text-error">致命缺陷：</strong>它没有做干净的上下文管理。它做任务时，就是把各种聊天记录、数据库文件全丢给大模型（openclaw也是有subagents的，但是动态记忆在初始版本做的不好，有待验证）。
@@ -358,7 +358,7 @@ export default function SlideHarness() {
                         <p className="text-[14px] text-white/50 tracking-widest font-tech uppercase mb-1 border-b border-white/10 pb-4">自带 Harness 与记忆的灵魂</p>
 
                         <div className="text-[15px] text-white/70 leading-[1.8] mt-2">
-                          由 <strong className="text-white drop-shadow-md border-b border-blue-400/50">Nous Research</strong> 发布的顶级开源智能体。它主打的就是“一个陪伴你共同成长的生态系统”。
+                          由 <strong className="text-white drop-shadow-md border-b border-blue-400/50">Nous Research</strong> 发布的顶级开源智能体。后来者居上，它主打的就是“一个陪伴你共同成长的生态系统”。
                         </div>
 
                         <div className="mt-4 bg-black/40 border-l-2 border-blue-400 p-5 rounded-r-xl relative overflow-hidden">
@@ -366,10 +366,10 @@ export default function SlideHarness() {
                           <div className="text-[15px] text-white/90 font-bold tracking-wide mb-2"><span className="text-blue-400 mr-2 text-lg drop-shadow-[0_0_5px_rgba(96,165,250,1)]">✦</span>神级 Harness 架构隔离</div>
                           <p className="text-[13.5px] text-white/60 leading-[1.8]">
                             它绝对不把所有的垃圾数据丢进同一个窗口杂交。<br /><br />
-                            它在底层做了一套极其优雅的“持久化记忆库 (<span className="text-blue-300 font-mono">Persistent Memory</span>)”和“隔离的子代理 (<span className="text-blue-300 font-mono">Isolated Subagents</span>)”。它会把你的个人偏好写成简短备忘录单独存储，每次执行任务时只呼唤最相关的记忆，把给 AI 的信息提纯得无比干净。
+                            它在底层做了一套优雅的“持久化记忆库 (<span className="text-blue-300 font-mono">Persistent Memory</span>)”和“隔离的子代理 (<span className="text-blue-300 font-mono">Isolated Subagents</span>)”。它会把你的个人偏好写成简短备忘录单独存储，每次执行任务时只呼唤最相关的记忆，把给 AI 的信息提纯得无比干净。
                           </p>
                           <div className="bg-error/10 px-4 py-3 rounded text-blue-300 text-[13.5px] italic border-error mt-2">
-                            锐评：“手脚麻利但没有灵魂。” 因为上下文被严重污染，它越聊越笨，经常执行错任务。
+                            锐评：真正的 Harness 工程，不是比谁能塞的数据多，而是比谁能把给 AI 的信息提纯得最干净。
                           </div>
                         </div>
                       </div>
@@ -433,7 +433,7 @@ export default function SlideHarness() {
                             Subagent C：门诊转化总监 <span className="text-white/90 text-[12px] font-normal tracking-normal ml-2">—— 商业融合大脑</span>
                           </div>
                           <div className="text-[13px] text-white/60 leading-relaxed">
-                            <span className="text-white/80 font-medium">● 它的任务：</span>拿着 B（医生）给出的硬核治疗方案，结合 A（客服）给出的患者预算和痛点，生成一套极其完美的“逼单/转化话术”。
+                            <span className="text-white/80 font-medium">● 它的任务：</span>拿着 B（医生）给出的硬核治疗方案，结合 A（客服）给出的患者预算和痛点，生成一套完美的“逼单/转化话术”。
                           </div>
                           <div className="text-[13px] text-white/60 leading-relaxed">
                             <span className="text-white/80 font-medium">● 跨界合作流水线：</span>接收 B 医生的硬核方案 + A 客服的痛点标记 + 门诊本月的优惠活动库、分期付款政策、消费者心理学。

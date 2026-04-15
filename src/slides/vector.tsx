@@ -27,8 +27,8 @@ export default function SlideVector() {
   const startQuantize = step >= 5;
   // Final INT format
   const showINT8 = step >= 6;
-  // Scaling factor independent popup
-  const showScaleFactor = step >= 7;
+  // Scaling factor independent popup (hide when card flips at step 9)
+  const showScaleFactor = step >= 7 && step < 9;
   // Pipeline details
   const showDetails = step >= 8;
   // Hardware and Naming flip card

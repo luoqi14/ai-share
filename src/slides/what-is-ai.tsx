@@ -4,12 +4,11 @@
  * Slide — "AI大模型是什么"
  * Step 0: Title centered
  * Step 1: Title → top-left, Magic Box appears
- * Step 2: 文本 input + arrow
- * Step 3: 文本 output + arrow
- * Step 4: 图像 input + arrow
- * Step 5: 音频 input + arrow
- * Step 6: 视频 input + arrow
- * Step 7: 图像/音频/视频 outputs + arrows (all at once)
+ * Step 2: 文本 input + output + arrows (both at once)
+ * Step 3: 图像/音频/视频 inputs + arrows (all at once)
+ * Step 4: 图像/音频/视频 outputs + arrows (all at once)
+ * Step 5: Math formula Y ∼ f(X; θ)
+ * Step 6: Token nodes inserted between inputs/outputs and model
  */
 
 import { useCurrentStep } from "@/config/StepContext";
@@ -21,16 +20,16 @@ import { BlockMath, InlineMath } from "react-katex";
 // Data definitions
 const inputItems = [
   { label: "文本", step: 2, color: "var(--color-primary-fixed-dim)" },
-  { label: "图像", step: 4, color: "var(--color-primary-fixed-dim)" },
-  { label: "音频", step: 5, color: "var(--color-primary-fixed-dim)" },
-  { label: "视频", step: 6, color: "var(--color-primary-fixed-dim)" },
+  { label: "图像", step: 3, color: "var(--color-primary-fixed-dim)" },
+  { label: "音频", step: 3, color: "var(--color-primary-fixed-dim)" },
+  { label: "视频", step: 3, color: "var(--color-primary-fixed-dim)" },
 ];
 
 const outputItems = [
-  { label: "文本", step: 3, color: "var(--color-secondary)" },
-  { label: "图像", step: 7, color: "var(--color-secondary)" },
-  { label: "音频", step: 7, color: "var(--color-secondary)" },
-  { label: "视频", step: 7, color: "var(--color-secondary)" },
+  { label: "文本", step: 2, color: "var(--color-secondary)" },
+  { label: "图像", step: 4, color: "var(--color-secondary)" },
+  { label: "音频", step: 4, color: "var(--color-secondary)" },
+  { label: "视频", step: 4, color: "var(--color-secondary)" },
 ];
 
 const MEDIA_ICONS: Record<string, React.ReactNode> = {
@@ -78,8 +77,8 @@ export default function SlideWhatIsAI() {
 
     const newArrows: ArrowData[] = [];
 
-    if (step >= 9 && tokenInRef.current && tokenOutRef.current) {
-      // Step 9: input chips → tokenIn → box → tokenOut → output chips
+    if (step >= 6 && tokenInRef.current && tokenOutRef.current) {
+      // Step 6: input chips → tokenIn → box → tokenOut → output chips
       const tinR = tokenInRef.current.getBoundingClientRect();
       const tinLeft = tinR.left - cRect.left;
       const tinRight = tinR.right - cRect.left;
@@ -177,7 +176,7 @@ export default function SlideWhatIsAI() {
               initial={{ opacity: 0 }}
               animate={{ opacity: step >= 2 ? 0.8 : 0 }}
             >
-              {step >= 4 ? "多模态输入 / MULTIMODAL" : "输入 / INPUT"}
+              {step >= 3 ? "多模态输入 / MULTIMODAL" : "输入 / INPUT"}
             </motion.div>
             <div className="flex flex-row sm:flex-col flex-wrap justify-center gap-2 sm:gap-3">
               {inputItems.map((item, i) => (
@@ -202,7 +201,7 @@ export default function SlideWhatIsAI() {
 
           {/* ====== Token: Input → Model ====== */}
           <AnimatePresence>
-            {step >= 9 && (
+            {step >= 6 && (
               <motion.div
                 className="hidden sm:flex flex-col items-center gap-1"
                 initial={{ opacity: 0, scale: 0.5 }}
@@ -253,14 +252,14 @@ export default function SlideWhatIsAI() {
             <motion.div
               className="absolute rounded-full monolith-orb-primary w-[clamp(180px,45vw,500px)] h-[clamp(180px,45vw,500px)]"
               animate={{
-                opacity: showBox && step < 8 ? [0.2, 0.5, 0.2] : (step >= 8 ? [0.05, 0.15, 0.05] : 0),
+                opacity: showBox && step < 5 ? [0.2, 0.5, 0.2] : (step >= 5 ? [0.05, 0.15, 0.05] : 0),
                 scale: showBox ? [0.9, 1.1, 0.9] : 0.5,
               }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
 
             <AnimatePresence mode="wait">
-              {step < 8 ? (
+              {step < 5 ? (
                 <motion.svg
                   key="magic-box"
                   viewBox="0 0 200 220"
@@ -357,7 +356,7 @@ export default function SlideWhatIsAI() {
 
           {/* ====== Token: Model → Output ====== */}
           <AnimatePresence>
-            {step >= 9 && (
+            {step >= 6 && (
               <motion.div
                 className="hidden sm:flex flex-col items-center gap-1"
                 initial={{ opacity: 0, scale: 0.5 }}
@@ -386,9 +385,9 @@ export default function SlideWhatIsAI() {
             <motion.div
               className="hidden sm:block absolute -top-12 left-0 text-[var(--color-text-primary)] text-xs sm:text-sm md:text-base font-semibold tracking-widest whitespace-nowrap opacity-60 uppercase"
               initial={{ opacity: 0 }}
-              animate={{ opacity: step >= 3 ? 0.8 : 0 }}
+              animate={{ opacity: step >= 2 ? 0.8 : 0 }}
             >
-              {step >= 7 ? "多模态输出 / MULTIMODAL" : "生成 / OUTPUT"}
+              {step >= 4 ? "多模态输出 / MULTIMODAL" : "生成 / OUTPUT"}
             </motion.div>
             <div className="flex flex-row sm:flex-col flex-wrap justify-center gap-2 sm:gap-3">
               {outputItems.map((item, i) => (

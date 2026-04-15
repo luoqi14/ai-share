@@ -15,6 +15,34 @@ type LimitItem = {
   metaphor?: { title: string; scenes: MetaphorScene[] };
 };
 
+type AgentPopupScene = { label?: string; text: string; highlight?: boolean };
+type AgentPopupData = { title: string; scenes: AgentPopupScene[] };
+
+const AGENT_POPUP_DATA: AgentPopupData[] = [
+  {
+    title: "💡 门诊隐喻：AI 实习生的随身便签本",
+    scenes: [
+      { text: "后台悄悄运行一个「总结小助手」，把聊天中的核心事实（「患者害怕打麻药」、「患者预算是 2 万」）写进长期记忆库——就像实习生每天下班前把重要事情记在随身便签上。" },
+      { text: "第二天上班哪怕换了个新工位（新对话），只要一眼扫完便签，就能瞬间接上昨天的工作——而不是完全失忆重来！", highlight: true },
+    ],
+  },
+  {
+    title: "💡 门诊隐喻：专科会诊单，不是搬图书馆",
+    scenes: [
+      { text: "患者问「最新的种植牙材料哪种最好？」——主任不会把整间医学图书馆的书搬进诊室。他只会让助理去检索，把那一页最新的临床对比结论打印出来递进来。" },
+      { text: "实时联网检索正是这道「递纸条」的机制：只把精准的那几行情报塞进上下文，绝不让整个互联网的噪声污染主治医生（AI）的脑子。", highlight: true },
+    ],
+  },
+  {
+    title: "💡 门诊隐喻：教实习生用系统，而非背系统",
+    scenes: [
+      { label: "传统做法的灾难（全量披露）", text: "为了让 AI 回答「张三明天下午能来复诊吗？」，你把门诊 5 万个患者的数据库、10 个医生的排班表一次性全塞进对话框。结果 AI 卡死了，且算错了。" },
+      { label: "Skills 的降维打击（渐进式披露）", text: "不要提前给资料！给 AI 配备【查询患者档案】【查询医生排班】两个技能探针——听到问题时，它自己去数据库只抽「张三」和「明天下午」的精确数据，再回答你。", highlight: true },
+      { text: "就好比你不要让实习生把整本《门诊管理系统》背下来，你只要教他怎么用鼠标去查系统。需要什么，当场查什么——这就是最顶级的上下文净化！" },
+    ],
+  },
+];
+
 const LIMIT_ITEMS: LimitItem[] = [
   {
     icon: "📏",
@@ -85,6 +113,10 @@ export default function SlideContext() {
   const step = useCurrentStep();
   const showBox = step >= 1;
 
+  // Popup indexes: -1 = no popup
+  const limitPopupIndex = step >= 8 && step <= 11 ? step - 8 : -1;
+  const agentPopupIndex = step >= 15 && step <= 17 ? step - 15 : -1;
+
   return (
     <div className="slide !p-0 overflow-hidden">
       <SlideTitle title="上下文工程" label="CONTEXT ENGINEERING" moved={showBox} />
@@ -114,7 +146,7 @@ export default function SlideContext() {
             {/* Left Panel */}
             <div className="w-full sm:flex-[0.4] flex flex-col pt-4 shrink-0">
               <AnimatePresence mode="wait">
-                {step >= 2 && step <= 7 && (
+                {step >= 2 && step <= 11 && (
                   <motion.div
                     key="left-1"
                     initial={{ opacity: 0, x: -20 }}
@@ -148,7 +180,7 @@ export default function SlideContext() {
                   </motion.div>
                 )}
 
-                {step >= 8 && step <= 9 && (
+                {step >= 12 && step <= 13 && (
                   <motion.div
                     key="left-2"
                     initial={{ opacity: 0, x: -20 }}
@@ -179,7 +211,7 @@ export default function SlideContext() {
                   </motion.div>
                 )}
 
-                {step >= 10 && (
+                {step >= 14 && (
                   <motion.div
                     key="left-3"
                     initial={{ opacity: 0, x: -20 }}
@@ -279,8 +311,8 @@ export default function SlideContext() {
                 )}
 
 
-                {/* VISUAL B: Limitations (Step 7) */}
-                {step === 7 && (
+                {/* VISUAL B: Limitations (Steps 7–11) */}
+                {step >= 7 && step <= 11 && (
                   <motion.div
                     key="right-limits"
                     className="absolute inset-0 flex flex-col justify-center p-4 sm:p-8 md:p-12 gap-4 sm:gap-6 overflow-y-auto"
@@ -297,7 +329,11 @@ export default function SlideContext() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: i * 0.1, type: "spring", stiffness: 200 }}
-                          className="relative group bg-error/5 border border-error/10 hover:border-error/30 p-4 sm:p-6 rounded-2xl transition-colors backdrop-blur-sm shadow-xl overflow-hidden"
+                          className={`relative group p-4 sm:p-6 rounded-2xl transition-all backdrop-blur-sm shadow-xl overflow-hidden ${
+                            limitPopupIndex === i
+                              ? "bg-error/10 border-2 border-error/50 ring-2 ring-error/20"
+                              : "bg-error/5 border border-error/10 hover:border-error/30"
+                          }`}
                         >
                           <div className="text-[32px] mb-3 drop-shadow-sm">{item.icon}</div>
                           <div className="text-[17px] font-medium text-white/90 mb-2">{item.title}</div>
@@ -340,8 +376,8 @@ export default function SlideContext() {
                 )}
 
 
-                {/* VISUAL C: Filter & Engineering (Step 8) */}
-                {step === 8 && (
+                {/* VISUAL C: Filter & Engineering (Step 12) */}
+                {step === 12 && (
                   <motion.div
                     key="right-filter"
                     className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 md:p-12 overflow-y-auto"
@@ -381,8 +417,8 @@ export default function SlideContext() {
                 )}
 
 
-                {/* VISUAL D: Manual Engineering (Step 9) */}
-                {step === 9 && (
+                {/* VISUAL D: Manual Engineering (Step 13) */}
+                {step === 13 && (
                   <motion.div
                     key="right-manual"
                     className="absolute inset-0 flex flex-col justify-center items-center p-4 sm:p-8 md:p-12 gap-4 sm:gap-8 overflow-y-auto"
@@ -428,8 +464,8 @@ export default function SlideContext() {
                 )}
 
 
-                {/* VISUAL E: Ultimate Agent Architecture (Step 10) */}
-                {step === 10 && (
+                {/* VISUAL E: Ultimate Agent Architecture (Steps 14–17) */}
+                {step >= 14 && (
                   <motion.div
                     key="right-auto"
                     className="absolute inset-0 flex flex-col justify-center items-center p-3 sm:p-8 md:p-12 bg-black/40 overflow-y-auto"
@@ -449,7 +485,7 @@ export default function SlideContext() {
                       </div>
 
                       {/* RAG DB */}
-                      <div className="group relative flex flex-col justify-center gap-2 bg-[#161616] border border-white/5 p-5 rounded-2xl hover:border-white/10 transition-colors overflow-hidden">
+                      <div className={`group relative flex flex-col justify-center gap-2 bg-[#161616] p-5 rounded-2xl transition-all overflow-hidden ${agentPopupIndex === 0 ? "border-2 border-amber-400/50 ring-2 ring-amber-400/20" : "border border-white/5 hover:border-white/10"}`}>
                         <div className="flex items-center gap-3">
                           <span className="text-2xl drop-shadow-sm text-primary">📚</span>
                           <span className="text-[15px] font-medium text-white/90 ml-1">动态记忆系统 (含 RAG)</span>
@@ -471,7 +507,7 @@ export default function SlideContext() {
                       </div>
 
                       {/* Web Search */}
-                      <div className="group relative flex flex-col justify-center gap-2 bg-[#161616] border border-white/5 p-5 rounded-2xl hover:border-white/10 transition-colors overflow-hidden">
+                      <div className={`group relative flex flex-col justify-center gap-2 bg-[#161616] p-5 rounded-2xl transition-all overflow-hidden ${agentPopupIndex === 1 ? "border-2 border-amber-400/50 ring-2 ring-amber-400/20" : "border border-white/5 hover:border-white/10"}`}>
                         <div className="flex items-center gap-3">
                           <span className="text-2xl drop-shadow-sm text-primary">🌐</span>
                           <span className="text-[15px] font-medium text-white/90 ml-1">实时网络检索</span>
@@ -493,7 +529,7 @@ export default function SlideContext() {
                       </div>
 
                       {/* Agent Skills */}
-                      <div className="col-span-2 group flex flex-col justify-center gap-3 bg-[#111] border border-secondary/20 p-5 rounded-2xl shadow-[0_0_15px_rgba(var(--color-secondary),0.05)] relative overflow-hidden hover:border-secondary/50 transition-colors">
+                      <div className={`col-span-2 group flex flex-col justify-center gap-3 bg-[#111] p-5 rounded-2xl shadow-[0_0_15px_rgba(var(--color-secondary),0.05)] relative overflow-hidden transition-all ${agentPopupIndex === 2 ? "border-2 border-amber-400/50 ring-2 ring-amber-400/20" : "border border-secondary/20 hover:border-secondary/50"}`}>
                         <div className="absolute top-0 right-0 p-4 opacity-[0.03] text-6xl group-hover:scale-125 transition-transform duration-700">⚙️</div>
                         <div className="relative z-10 flex items-center gap-3">
                           <span className="text-2xl drop-shadow-sm">🛠️</span>
@@ -532,6 +568,59 @@ export default function SlideContext() {
             </div>
           </motion.div>
         )}
+      </AnimatePresence>
+
+      {/* Centered Step Popup */}
+      <AnimatePresence mode="wait">
+        {(limitPopupIndex >= 0 || agentPopupIndex >= 0) && (() => {
+          const isLimit = limitPopupIndex >= 0;
+          const popupTitle = isLimit ? LIMIT_ITEMS[limitPopupIndex].metaphor!.title : AGENT_POPUP_DATA[agentPopupIndex].title;
+          const popupScenes = isLimit ? LIMIT_ITEMS[limitPopupIndex].metaphor!.scenes : AGENT_POPUP_DATA[agentPopupIndex].scenes;
+          const cardTitle = isLimit ? LIMIT_ITEMS[limitPopupIndex].title : undefined;
+          const cardIcon = isLimit ? LIMIT_ITEMS[limitPopupIndex].icon : undefined;
+          return (
+            <motion.div
+              key={step}
+              className="absolute inset-0 z-50 flex items-center justify-center p-6 sm:p-12 bg-black/70 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <motion.div
+                className="bg-[#0d0d1a] border border-amber-400/30 rounded-2xl p-6 sm:p-8 max-w-lg w-full shadow-2xl shadow-amber-400/5"
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                transition={{ type: "spring", bounce: 0.25, duration: 0.35 }}
+              >
+                {cardIcon && cardTitle && (
+                  <div className="flex items-center gap-2 mb-3 text-error text-[16px] font-bold">
+                    <span>{cardIcon}</span>
+                    <span>{cardTitle}</span>
+                  </div>
+                )}
+                <div className="text-amber-400 text-[10px] font-bold uppercase tracking-widest pb-2 border-b border-amber-400/20 mb-4">
+                  {popupTitle}
+                </div>
+                <div className="flex flex-col gap-3">
+                  {popupScenes.map((scene, si) => (
+                    <div key={si}>
+                      {scene.label && (
+                        <div className="text-white/50 text-[10px] font-bold uppercase tracking-wider mb-1">
+                          {scene.label}
+                        </div>
+                      )}
+                      <p className={`text-[13px] leading-relaxed ${scene.highlight ? "text-amber-300/90 font-semibold" : "text-white/75"}`}>
+                        {scene.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          );
+        })()}
       </AnimatePresence>
     </div>
   );

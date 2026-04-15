@@ -3,17 +3,20 @@
 /**
  * Slide — "为什么 AI 写小说总爱倒吸一口凉气"
  *
- * Step 0: Title centered
- * Step 1: Title moved, prompt text shown
- * Step 2: Option A [倒吸]
- * Step 3: Option B [此子]
- * Step 4: Option C [双手]
- * Step 5: Option D [沉默]
- * Step 6: Interactive Dashboard (Temperature slider + 4 prompt presets)
- * Step 7: Epiphany conclusion cards
+ * Step 0:  Title centered
+ * Step 1:  Title moved, prompt text shown
+ * Step 2:  Option A [倒吸]
+ * Step 3:  Option B [此子]
+ * Step 4:  Option C [双手]
+ * Step 5:  Option D [沉默]
+ * Step 6:  Controls appear, preset 0 selected (无额外指令), temperature auto-oscillates
+ * Step 7:  Preset 1 selected (指定阴谋心理), temperature keeps oscillating
+ * Step 8:  Preset 2 selected (指定身体反应), temperature keeps oscillating
+ * Step 9:  Preset 3 selected (指定克制留白), temperature keeps oscillating
+ * Step 10: Epiphany conclusion cards
  */
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useCurrentStep } from "@/config/StepContext";
 import { motion, AnimatePresence } from "motion/react";
 import SlideTitle from "@/components/SlideTitle";
@@ -73,16 +76,54 @@ const PRESET_STYLES: Record<string, { activeBg: string; activeBorder: string; ac
 export default function SlideLogits() {
   const step = useCurrentStep();
 
-  const showPrompt = step >= 1;
-  const showOptionA = step >= 2;
-  const showOptionB = step >= 3;
-  const showOptionC = step >= 4;
-  const showOptionD = step >= 5;
-  const showControls = step >= 6;
-  const showConclusion = step >= 7;
+  const showPrompt    = step >= 1;
+  const showOptionA   = step >= 2;
+  const showOptionB   = step >= 3;
+  const showOptionC   = step >= 4;
+  const showOptionD   = step >= 5;
+  const showControls  = step >= 6;
+  const showConclusion = step >= 10;
+
+  // Preset selection is driven by step (6→0, 7→1, 8→2, 9→3)
+  const selectedPreset = Math.min(Math.max(step - 6, 0), 3);
 
   const [temperature, setTemperature] = useState(0.7);
-  const [selectedPreset, setSelectedPreset] = useState(0);
+  const directionRef     = useRef(1);     // 1 = rising, -1 = falling
+  const userGrabbedRef   = useRef(false); // set to true when user drags slider
+
+  // Auto-oscillate temperature while controls are visible and conclusion not shown.
+  // Re-runs on every step change, which resets userGrabbedRef so auto resumes.
+  useEffect(() => {
+    if (!showControls || showConclusion) return;
+
+    userGrabbedRef.current = false; // new step → restart auto
+    directionRef.current   = 1;
+
+    let lastTime: number | null = null;
+    let rafId: number;
+    const SPEED = 0.35; // units per second (~5 s full cycle)
+
+    const tick = (ts: number) => {
+      if (userGrabbedRef.current) return; // user took over — stop scheduling
+
+      if (lastTime === null) lastTime = ts;
+      const dt = Math.min((ts - lastTime) / 1000, 0.05);
+      lastTime = ts;
+
+      setTemperature(prev => {
+        let next = prev + directionRef.current * SPEED * dt;
+        if (next >= 2.0)  { next = 2.0;  directionRef.current = -1; }
+        if (next <= 0.01) { next = 0.01; directionRef.current =  1; }
+        return parseFloat(next.toFixed(2));
+      });
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+    // step in deps: effect restarts on each step, which resets userGrabbedRef
+  }, [showControls, showConclusion, step]);
 
   // Calculate Softmax from selected preset's logits + temperature
   const probabilities = useMemo(() => {
@@ -219,8 +260,11 @@ export default function SlideLogits() {
                   <input
                     type="range" min="0.01" max="2.0" step="0.01"
                     value={temperature}
-                    onChange={(e) => setTemperature(parseFloat(e.target.value))}
-                    className="w-full appearance-none bg-gray-700 h-2 rounded outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-(--color-primary) cursor-pointer"
+                    onChange={(e) => {
+                      userGrabbedRef.current = true; // stop auto-oscillation
+                      setTemperature(parseFloat(e.target.value));
+                    }}
+                    className="w-full bg-gray-700 h-2 rounded outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-(--color-primary) cursor-pointer"
                   />
                   <div className="flex justify-between text-[10px] text-gray-500 mt-1 font-mono">
                     <span>向左: 套路复读机</span>
@@ -240,7 +284,6 @@ export default function SlideLogits() {
                       return (
                         <button
                           key={preset.id}
-                          onClick={() => setSelectedPreset(preset.id)}
                           className={`text-left p-3 rounded-xl border transition-all duration-200 ${
                             isActive
                               ? `${styles.activeBg} ${styles.activeBorder} ${styles.activeText}`
